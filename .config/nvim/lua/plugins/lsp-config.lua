@@ -6,7 +6,13 @@ return {
     {
         "mason-org/mason-lspconfig.nvim",
         opts = {
-            ensure_installed = { "lua_ls", "clangd",}--"pyright" },
+            ensure_installed = {
+                "lua_ls",
+                "clangd",
+                "pyright",
+                "jdtls",
+                "kotlin_language_server",
+            },
         },
         dependencies = {
             "mason-org/mason.nvim",
@@ -26,7 +32,9 @@ return {
             lspconfig.clangd.setup({
                 capabilities = capabilities
             })
-            -- lspconfig.pyright.setup({})
+            lspconfig.clangd.setup({
+                capabilities = capabilities
+            })
 
             -- keybinds
             vim.keymap.set('n', 'K', vim.lsp.buf.hover, {})
