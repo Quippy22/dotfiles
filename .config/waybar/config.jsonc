@@ -26,7 +26,8 @@
   "clock": {
     "timezone": "Europe/Bucharest",
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-    "format": "{:%d - %H:%M}"
+    "format": "{:%d - %H:%M}",
+    "locale": "ro_RO.utf-8"
   },
   "network": {
     "format-wifi": "󰤢 ",
