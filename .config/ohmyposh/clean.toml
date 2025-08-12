@@ -38,6 +38,14 @@ light_blue = "#78a7b9"
             commit_icon = '@'
 
     [[blocks.segments]]
+    type = "env"
+    style = "plain"
+    foreground = "p:orange"
+    background = "transparent"
+    env = "CONDA_DEFAULT_ENV"
+    template = " λ {{ .EnvValue }}"
+
+        [[blocks.segments]]
         type = 'text'
         style = 'plain'
         foreground_templates = [

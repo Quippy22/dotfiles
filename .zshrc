@@ -75,3 +75,24 @@ export LC_TIME=ro_RO.UTF-8
 # All other categories default to English
 export LC_ALL=
 
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/darius/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/darius/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/darius/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/darius/miniconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+# export the scripts
+export PATH="$HOME/Coding/Scripts:$PATH"
+
+# auto-envs
+eval "$(direnv hook zsh)"
