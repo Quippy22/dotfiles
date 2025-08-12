@@ -13,7 +13,7 @@ return {
     config = function(_, opts)
       require("tokyonight").setup(opts)
       vim.cmd.colorscheme("tokyonight")
-      
+
       vim.defer_fn(function()
         local hl = vim.api.nvim_set_hl
 

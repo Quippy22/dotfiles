@@ -12,6 +12,7 @@ return {
                 "pyright",
                 "jdtls",
                 "kotlin_language_server",
+                "html",
             },
         },
         dependencies = {
