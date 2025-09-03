@@ -17,3 +17,8 @@ vim.opt.rtp:prepend(lazypath)
 require("vim-options")
 require("lazy").setup("plugins")
 
+
+-- For Neovim Lua config
+vim.g.python3_host_prog = '/home/darius/Coding/PythonCode/Automation/automationEnv/bin/python'
+
+
