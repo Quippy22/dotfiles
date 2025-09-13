@@ -12,4 +12,7 @@ vim.opt.relativenumber = true
 ---@diagnostic disable-next-line: undefined-global
 vim.g.mapleader = " "
 
+-- Yank selection to system clipboard in any visual mode
+vim.api.nvim_set_keymap('x', '<leader>y', '"+y', { noremap = true, silent = true })
+
 
