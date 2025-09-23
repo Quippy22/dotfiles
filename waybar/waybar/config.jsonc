@@ -2,15 +2,15 @@
   "layer": "top",
   "position": "top",
   "modules-left": [
-        "hyprland/workspaces"
-    ],
+    "hyprland/workspaces"
+  ],
   "modules-center": ["clock"],
   "modules-right": [
-    "network",
     "cpu",
     "memory",
     "tray",
-    "custom/lock"
+    "custom/lock",
+    "custom/poweroff"
   ],
   "hyprland/workspaces": {
     "format": "{name}: {icon}",
@@ -28,13 +28,6 @@
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
     "format": "{:%d - %H:%M}",
     "locale": "ro_RO.utf-8"
-  },
-  "network": {
-    "format-wifi": "󰤢 ",
-    "format-ethernet": "󰈀 ",
-    "format-disconnected": "󰤠 ",
-    "interval": 5,
-    "tooltip": false
   },
   "cpu": {
     "interval": 1,
@@ -58,16 +51,10 @@
     "on-click": "sh -c '(sleep 0.5s; hyprlock)' & disown",
     "format": ""
   },
-    "custom/stream_status": {
-        "format": "{text}",
-        "exec": "~/.local/scripts/stream_status",
-        "interval": 5,
-        "return-type": "json",
-        "tooltip": true
-    },
-    "later": {
-        "format": "<span class='icon'>{icon}</span> <span class='text'>{text}</span>"
-    }
-
+  "custom/poweroff": {
+    "tooltip": "Power Off",
+    "on-click": "systemctl poweroff",
+    "format": "⏻"
+  },
 }
 
