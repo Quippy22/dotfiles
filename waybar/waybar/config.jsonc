@@ -9,6 +9,7 @@
     "cpu",
     "memory",
     "tray",
+    "custom/updates",
     "custom/lock",
     "custom/poweroff"
   ],
@@ -45,6 +46,14 @@
       "default": ["", "", " "]
     },
     "on-click": "pavucontrol"
+  },
+  "custom/updates": {
+    "interval": 1800,
+    "exec": "/home/darius/dotfiles/waybar/scripts/updates.sh",
+    "return-type": "json",
+    "tooltip": "Available Updates",
+    "format": "{}",
+    "on-click": "kitty -e yay -Syu"
   },
   "custom/lock": {
     "tooltip": false,

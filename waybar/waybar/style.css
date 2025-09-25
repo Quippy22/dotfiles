@@ -19,6 +19,27 @@
   background: #1b2a47;
   margin-left: 1rem;
 }
+* {
+  font-family: JetbrainsMono Nerd Font;
+  font-size: 20px;
+  min-height: 0;
+  padding-right: 2px;
+  padding-left: 2px;
+  padding-bottom: 0px;
+}
+
+#waybar {
+  background: transparent;
+  color: #c6d0f5;
+  margin: 2px 2px;
+}
+
+#workspaces {
+  border-radius: 5px;
+  margin: 5px;
+  background: #1b2a47;
+  margin-left: 1rem;
+}
 
 #workspaces button {
   color: #babbf1;
@@ -44,6 +65,7 @@
 #pulseaudio,
 #cpu,
 #memory,
+#custom-updates,
 #custom-lock,
 #custom-poweroff {
   background-color: #1b2a47;
@@ -94,8 +116,13 @@
   border-radius: 5px;
 }
 
-#custom-lock {
+#custom-updates {
+  color: #babbf1;
   border-radius: 5px 0px 0px 5px;
+}
+
+#custom-lock {
+  border-radius: 0;
   color: #babbf1;
 }
 
