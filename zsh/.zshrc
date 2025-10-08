@@ -71,7 +71,7 @@ export LC_TIME=ro_RO.UTF-8
 export LC_ALL=
 
 #--- Paths 
-# export scripts
+# scripts
 export PATH="$HOME/Coding/Scripts:$PATH"
 # npm
 export PATH="$HOME/.npm-global/bin:$PATH"
