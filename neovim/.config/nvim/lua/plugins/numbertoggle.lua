@@ -1,7 +1,6 @@
 return {
-  {
-    "jeffkreeftmeijer/vim-numbertoggle",
-    lazy = false,
-  }
+    {
+        "jeffkreeftmeijer/vim-numbertoggle",
+        lazy = false,
+    },
 }
-
