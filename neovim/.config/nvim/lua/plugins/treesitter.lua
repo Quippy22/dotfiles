@@ -1,31 +1,45 @@
 return {
-  'nvim-treesitter/nvim-treesitter',
-  build = ':TSUpdate',
-  event = 'BufReadPre',
+    "nvim-treesitter/nvim-treesitter",
+    build = ":TSUpdate",
+    event = "BufReadPre",
 
-  config = function()
-    require('nvim-treesitter.configs').setup({
-      ensure_installed = {
-        'c',
-        'cpp',
-        'lua',
-        'vim',
-        'vimdoc',
-        'query',
-        'python',
-        'javascript',
-        'html',
-      },
+    config = function()
+        require("nvim-treesitter.configs").setup({
+            ensure_installed = {
+                "c",
+                "cpp",
+                "lua",
+                "vim",
+                "vimdoc",
+                "query",
+                "python",
+                "javascript",
+                "html",
+            },
 
-      -- Install parsers synchronously (only for parsers in ensure_installed)
-      sync_install = false,
+            sync_install = false,
+            auto_install = true,
 
-      -- Automatically install missing parsers (only for parsers in ensure_installed)
-      auto_install = true,
+            highlight = {
+                enable = true,
+            },
 
-      highlight = {
-        enable = true,
-      },
-    })
-  end,
+            -- Add textobjects
+            textobjects = {
+                select = {
+                    enable = true,
+                    lookahead = true, -- Automatically jump forward to textobj
+                    keymaps = {
+                        ["af"] = "@function.outer",
+                        ["if"] = "@function.inner",
+                        ["ac"] = "@class.outer",
+                        ["ic"] = "@class.inner",
+                    },
+                },
+            },
+        })
+
+        -- Keymap to yank the current function under the cursor
+        vim.api.nvim_set_keymap("n", "<leader>yf", [[:normal! vaf y<CR>]], { noremap = true, silent = true })
+    end,
 }
