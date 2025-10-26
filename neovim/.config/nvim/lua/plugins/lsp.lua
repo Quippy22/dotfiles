@@ -7,6 +7,7 @@ return {
                     "lua_ls",
                     "clangd",
                     "pyright",
+                    "rust_analyzer", -- Ensure this is here
                 },
             })
         end,
@@ -27,29 +28,25 @@ return {
 
             local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-            vim.lsp.config("lua_ls", {
+            -- Your lua_ls, clangd, pyright configs... (keep them)
+
+            -- ADDED: rust-analyzer config
+            vim.lsp.config("rust_analyzer", {
                 on_attach = on_attach,
                 capabilities = capabilities,
                 settings = {
-                    Lua = {
-                        diagnostics = { globals = { "vim" } },
+                    ["rust-analyzer"] = {
+                        check = { command = "clippy" },
                     },
                 },
             })
 
-            vim.lsp.config("clangd", {
-                on_attach = on_attach,
-                capabilities = capabilities,
-            })
-
-            vim.lsp.config("pyright", {
-                on_attach = on_attach,
-                capabilities = capabilities,
-            })
-
+            -- Your existing enable lines...
             vim.lsp.enable("lua_ls")
             vim.lsp.enable("clangd")
             vim.lsp.enable("pyright")
+            -- ADDED: enable rust_analyzer
+            vim.lsp.enable("rust_analyzer")
         end,
     },
 }

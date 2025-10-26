@@ -8,23 +8,35 @@ return {
     config = function()
         local dap = require("dap")
         local dapui = require("dapui")
-
         require("dapui").setup()
 
-        dap.listeners.before.attach.dapui_config = function()
-            dapui.open()
-        end
-        dap.listeners.before.launch.dapui_config = function()
-            dapui.open()
-        end
-        dap.listeners.before.event_terminated.dapui_config = function()
-            dapui.close()
-        end
-        dap.listeners.before.event_exited.dapui_config = function()
-            dapui.close()
-        end
+        dap.listeners.before.attach.dapui_config = function() dapui.open() end
+        dap.listeners.before.launch.dapui_config = function() dapui.open() end
+        dap.listeners.before.event_terminated.dapui_config = function() dapui.close() end
+        dap.listeners.before.event_exited.dapui_config = function() dapui.close() end
 
-        -- Keymaps for controlling the debugger
+        local codelldb_path = require("mason-registry").get_package("codelldb"):get_install_path()
+            .. "/extension/adapter/codelldb"
+        dap.adapters.codelldb = {
+            type = "server",
+            port = "${port}",
+            executable = { command = codelldb_path, args = { "--port", "${port}" } },
+        }
+
+        dap.configurations.rust = {
+            {
+                name = "Launch file",
+                type = "codelldb",
+                request = "launch",
+                program = function()
+                    return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/target/debug/", "file")
+                end,
+                cwd = "${workspaceFolder}",
+                stopOnEntry = false,
+            },
+        }
+
+        -- DAP keymaps
         vim.keymap.set("n", "<leader>dt", dap.toggle_breakpoint, { desc = "DAP: Toggle Breakpoint" })
         vim.keymap.set("n", "<leader>dc", dap.continue, { desc = "DAP: Continue" })
         vim.keymap.set("n", "<leader>do", dap.step_over, { desc = "DAP: Step Over" })
