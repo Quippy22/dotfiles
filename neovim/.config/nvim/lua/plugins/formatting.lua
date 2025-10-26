@@ -1,27 +1,18 @@
 return {
     "stevearc/conform.nvim",
-    event = { "BufWritePre" },
+    event = { "BufReadPre", "BufNewFile" },
+    ft = { "rust", "lua", "python", "c", "cpp" },
     cmd = { "ConformInfo" },
     config = function()
+        print("--- Loading conform.nvim configuration (NO format on save) ---")
+
         local conform = require("conform")
 
         conform.setup({
-            format_on_save = {
-                timeout_ms = 500,
-                lsp_fallback = true,
-            },
-
             formatters_by_ft = {
-                -- Rust
                 rust = { "rustfmt" },
-
-                -- Lua
                 lua = { "stylua --indent-width 4 --indent-type Spaces" },
-
-                -- Python
                 python = { "isort", "black --line-length 120" },
-
-                -- C/C++
                 c = { "clang_format --style={BasedOnStyle: LLVM, IndentWidth: 4, UseTab: Never}" },
                 cpp = { "clang_format --style={BasedOnStyle: LLVM, IndentWidth: 4, UseTab: Never}" },
             },

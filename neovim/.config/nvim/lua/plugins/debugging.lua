@@ -4,10 +4,17 @@ return {
         "rcarriga/nvim-dap-ui",
         "nvim-neotest/nvim-nio",
         "williamboman/mason.nvim",
+        "jay-babu/mason-nvim-dap.nvim",
     },
     config = function()
         local dap = require("dap")
         local dapui = require("dapui")
+
+        require("mason-nvim-dap").setup({
+            ensure_installed = { "codelldb" },
+            handlers = {},
+        })
+
         require("dapui").setup()
 
         dap.listeners.before.attach.dapui_config = function() dapui.open() end
@@ -15,13 +22,6 @@ return {
         dap.listeners.before.event_terminated.dapui_config = function() dapui.close() end
         dap.listeners.before.event_exited.dapui_config = function() dapui.close() end
 
-        local codelldb_path = require("mason-registry").get_package("codelldb"):get_install_path()
-            .. "/extension/adapter/codelldb"
-        dap.adapters.codelldb = {
-            type = "server",
-            port = "${port}",
-            executable = { command = codelldb_path, args = { "--port", "${port}" } },
-        }
 
         dap.configurations.rust = {
             {
@@ -36,7 +36,6 @@ return {
             },
         }
 
-        -- DAP keymaps
         vim.keymap.set("n", "<leader>dt", dap.toggle_breakpoint, { desc = "DAP: Toggle Breakpoint" })
         vim.keymap.set("n", "<leader>dc", dap.continue, { desc = "DAP: Continue" })
         vim.keymap.set("n", "<leader>do", dap.step_over, { desc = "DAP: Step Over" })
