@@ -3,10 +3,14 @@ return {
     dependencies = {
         "rcarriga/nvim-dap-ui",
         "nvim-neotest/nvim-nio",
+        "williamboman/mason.nvim",
     },
     config = function()
+        local dap = require("dap")
+        local dapui = require("dapui")
+
         require("dapui").setup()
-        local dap, dapui = require("dap"), require("dapui")
+
         dap.listeners.before.attach.dapui_config = function()
             dapui.open()
         end
@@ -20,9 +24,13 @@ return {
             dapui.close()
         end
 
-        vim.keymap.set("n", "<leader>dt", dap.toggle_breakpoint, {})
-        vim.keymap.set("n", "<leader>dc", dap.continue, {})
+        -- Keymaps for controlling the debugger
+        vim.keymap.set("n", "<leader>dt", dap.toggle_breakpoint, { desc = "DAP: Toggle Breakpoint" })
+        vim.keymap.set("n", "<leader>dc", dap.continue, { desc = "DAP: Continue" })
+        vim.keymap.set("n", "<leader>do", dap.step_over, { desc = "DAP: Step Over" })
+        vim.keymap.set("n", "<leader>di", dap.step_into, { desc = "DAP: Step Into" })
+        vim.keymap.set("n", "<leader>ds", dap.step_out, { desc = "DAP: Step Out" })
+        vim.keymap.set("n", "<leader>du", dapui.toggle, { desc = "DAP: Toggle UI" })
+        vim.keymap.set("n", "<leader>dr", dap.repl.open, { desc = "DAP: Open REPL" })
     end,
 }
-
--- for actuall debugging install daps, check nvim-dap
