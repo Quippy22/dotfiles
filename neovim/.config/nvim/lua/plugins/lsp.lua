@@ -35,69 +35,43 @@ return {
 
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-			vim.lsp.config("pyright", {
-				on_attach = on_attach,
-				capabilities = capabilities,
-			})
+			-- This is the new, correct syntax for Neovim 0.11+
+			local servers = {
+				"pyright",
+				"lua_ls",
+				"clangd",
+				"rust_analyzer",
+				"html",
+				"tailwindcss",
+				"pylsp",
+				"djlint",
+			}
 
-			vim.lsp.config("lua_ls", {
-				on_attach = on_attach,
-				capabilities = capabilities,
-			})
+			for _, server_name in ipairs(servers) do
+				local server_opts = {
+					on_attach = on_attach,
+					capabilities = capabilities,
+				}
 
-			vim.lsp.config("clangd", {
-				on_attach = on_attach,
-				capabilities = capabilities,
-			})
-
-			vim.lsp.config("rust_analyzer", {
-				on_attach = on_attach,
-				capabilities = capabilities,
-				settings = {
-					["rust-analyzer"] = {
-						check = { command = "clippy" },
-					},
-				},
-			})
-
-			vim.lsp.config("html", {
-				on_attach = on_attach,
-				capabilities = capabilities,
-			})
-
-			vim.lsp.config("tailwindcss", {
-				on_attach = on_attach,
-				capabilities = capabilities,
-				filetypes = {
-					"html",
-					"eruby",
-					"svelte",
-					"typescriptreact",
-					"javascriptreact",
-					"vue",
-					"php",
-					"htmldjango",
-				},
-			})
-
-			vim.lsp.config("pylsp", {
-				on_attach = on_attach,
-				capabilities = capabilities,
-				settings = {
-					pylsp = {
-						plugins = {
-							pyls_django = {
-								enabled = true,
+				-- Add server-specific settings here
+				if server_name == "tailwindcss" then
+					server_opts.filetypes =
+						{ "html", "eruby", "svelte", "typescriptreact", "javascriptreact", "vue", "php", "htmldjango" }
+				elseif server_name == "pylsp" then
+					server_opts.settings = {
+						pylsp = {
+							plugins = {
+								pyls_django = {
+									enabled = true,
+								},
 							},
 						},
-					},
-				},
-			})
+					}
+				end
 
-			vim.lsp.config("djlint", {
-				on_attach = on_attach,
-				capabilities = capabilities,
-			})
+				vim.lsp.config(server_name, server_opts)
+			end
 		end,
 	},
 }
+
