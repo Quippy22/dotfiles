@@ -70,6 +70,10 @@ export LC_TIME=ro_RO.UTF-8
 # All other categories default to English
 export LC_ALL=
 
+#-- editor
+export VISUAL=nvim
+export EDITOR="$VISUAL"
+
 #--- Paths 
 # scripts
 export PATH="$HOME/Coding/Scripts:$PATH"
