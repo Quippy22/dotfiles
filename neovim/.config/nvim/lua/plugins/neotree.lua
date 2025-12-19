@@ -9,7 +9,18 @@ return {
         },
         lazy = false,                      -- neo-tree will lazily load itself
         config = function()
-            require("neo-tree").setup({})
+            require("neo-tree").setup({
+                filesystem = {
+                    filtered_items = {
+                        hide_dotfiles = true,
+                        hide_gitignored = false,
+                        never_show = {
+                            ".git",
+                            ".venv",
+                        },
+                    },
+                },
+            })
             vim.keymap.set("n", "<C-n>", ":Neotree toggle<CR>", { silent = true })
         end,
     },

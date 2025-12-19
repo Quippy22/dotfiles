@@ -1,9 +1,13 @@
 return {
 	{
 		"williamboman/mason.nvim",
-		cmd = "Mason",
+		dependencies = {
+			"williamboman/mason-lspconfig.nvim",
+			"WhoIsSethDaniel/mason-tool-installer.nvim",
+		},
 		config = function()
-			require("mason").setup({
+			require("mason").setup()
+			require("mason-lspconfig").setup({
 				ensure_installed = {
 					"lua_ls",
 					"clangd",
@@ -12,30 +16,33 @@ return {
 					"html",
 					"tailwindcss",
 					"pylsp",
+				},
+			})
+			require("mason-tool-installer").setup({
+				ensure_installed = {
 					"prettier",
 					"djlint",
+					"stylua",
+					"isort",
+					"black",
+					"clang-format",
 				},
 			})
 		end,
 	},
 	{
 		"neovim/nvim-lspconfig",
-		event = "BufReadPre",
+		event = { "BufReadPre", "BufNewFile" },
 		dependencies = {
-			"williamboman/mason.nvim",
 			"hrsh7th/cmp-nvim-lsp",
 		},
 		config = function()
 			vim.diagnostic.config({ virtual_text = true })
-
 			local on_attach = function(client, bufnr)
 				vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = bufnr, desc = "LSP Hover" })
 				vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = bufnr, desc = "LSP Definition" })
 			end
-
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
-
-			-- This is the new, correct syntax for Neovim 0.11+
 			local servers = {
 				"pyright",
 				"lua_ls",
@@ -44,19 +51,23 @@ return {
 				"html",
 				"tailwindcss",
 				"pylsp",
-				"djlint",
 			}
-
 			for _, server_name in ipairs(servers) do
 				local server_opts = {
 					on_attach = on_attach,
 					capabilities = capabilities,
 				}
-
-				-- Add server-specific settings here
 				if server_name == "tailwindcss" then
-					server_opts.filetypes =
-						{ "html", "eruby", "svelte", "typescriptreact", "javascriptreact", "vue", "php", "htmldjango" }
+					server_opts.filetypes = {
+						"html",
+						"eruby",
+						"svelte",
+						"typescriptreact",
+						"javascriptreact",
+						"vue",
+						"php",
+						"htmldjango",
+					}
 				elseif server_name == "pylsp" then
 					server_opts.settings = {
 						pylsp = {
@@ -68,10 +79,9 @@ return {
 						},
 					}
 				end
-
 				vim.lsp.config(server_name, server_opts)
+				vim.lsp.enable(server_name)
 			end
 		end,
 	},
 }
-
