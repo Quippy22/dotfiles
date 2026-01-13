@@ -12,5 +12,5 @@ else
 fi
 
 # Output valid JSON for Waybar using jq
-jq -n --compact-output --arg text "↑ $count" --arg tooltip "$tooltip" \
+jq -n --compact-output --arg text "↑$count" --arg tooltip "$tooltip" \
     '{text: $text, tooltip: $tooltip}'

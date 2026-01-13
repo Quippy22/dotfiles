@@ -1,5 +1,5 @@
 * {
-    font-family: JetbrainsMono Nerd Font;
+    font-family: "JetBrainsMono Nerd Font", "CaskaydiaMono Nerd Font", monospace;
     font-size: 20px;
     min-height: 0;
     padding-right: 2px;
@@ -87,6 +87,7 @@
 #custom-updates {
     color: #babbf1;
     border-radius: 5px 0px 0px 5px;
+    padding-right: 0.5rem;
 }
 
 #custom-lock {

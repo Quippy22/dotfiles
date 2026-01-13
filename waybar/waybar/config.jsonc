@@ -16,7 +16,7 @@
         "custom/poweroff"
     ],
     "hyprland/workspaces": {
-        "format": "{name}: {icon}",
+        "format": "{name}:{icon}",
         "format-icons": {
             "active": "",
             "default": ""
@@ -70,6 +70,7 @@
     "custom/temps": {
         "interval": 5,
         "exec": "/home/darius/dotfiles/waybar/scripts/temps.sh",
+        "return-type": "json",
         "format": "{}"
     }
 }

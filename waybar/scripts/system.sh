@@ -7,5 +7,5 @@ cpu=$(top -bn1 | grep "Cpu(s)" | awk '{printf "%d%%", 100 - $8}')
 ram=$(free -h | awk '/^Mem:/ {printf "%.1fG", $3}')
 
 # Output CPU and RAM separated by a space
-echo "  $cpu   $ram"
+echo " $cpu  $ram"
 
