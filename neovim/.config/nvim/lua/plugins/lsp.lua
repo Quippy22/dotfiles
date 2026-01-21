@@ -15,16 +15,13 @@ return {
 					"rust_analyzer",
 					"html",
 					"tailwindcss",
-					"pylsp",
+					"ruff",
 				},
 			})
 			require("mason-tool-installer").setup({
 				ensure_installed = {
 					"prettier",
-					"djlint",
 					"stylua",
-					"isort",
-					"black",
 					"clang-format",
 				},
 			})
@@ -37,7 +34,21 @@ return {
 			"hrsh7th/cmp-nvim-lsp",
 		},
 		config = function()
-			vim.diagnostic.config({ virtual_text = true })
+			vim.diagnostic.config({
+				virtual_text = true,
+				signs = {
+					text = {
+						[vim.diagnostic.severity.ERROR] = " ",
+						[vim.diagnostic.severity.WARN] = " ",
+						[vim.diagnostic.severity.HINT] = "󰠠 ",
+						[vim.diagnostic.severity.INFO] = " ",
+					},
+				},
+				underline = true,
+				update_in_insert = true,
+				severity_sort = true,
+			})
+
 			local on_attach = function(client, bufnr)
 				vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = bufnr, desc = "LSP Hover" })
 				vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = bufnr, desc = "LSP Definition" })
@@ -50,7 +61,7 @@ return {
 				"rust_analyzer",
 				"html",
 				"tailwindcss",
-				"pylsp",
+				"ruff",
 			}
 			for _, server_name in ipairs(servers) do
 				local server_opts = {
@@ -66,17 +77,6 @@ return {
 						"javascriptreact",
 						"vue",
 						"php",
-						"htmldjango",
-					}
-				elseif server_name == "pylsp" then
-					server_opts.settings = {
-						pylsp = {
-							plugins = {
-								pyls_django = {
-									enabled = true,
-								},
-							},
-						},
 					}
 				end
 				vim.lsp.config(server_name, server_opts)

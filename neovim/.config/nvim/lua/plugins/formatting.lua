@@ -5,11 +5,10 @@ return {
 		formatters_by_ft = {
 			rust = { "rustfmt" },
 			lua = { "stylua" },
-			python = { "isort", "black" },
+			python = { "ruff_organize_imports", "ruff_format" },
 			c = { "clang-format" },
 			cpp = { "clang-format" },
 			html = { "prettier" },
-			htmldjango = { "djlint" },
 		},
 		formatters = {
 			prettier = {
