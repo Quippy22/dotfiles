@@ -82,6 +82,8 @@ export EDITOR="$VISUAL"
 export PATH="$HOME/Coding/Scripts:$PATH"
 # npm
 export PATH="$HOME/.npm-global/bin:$PATH"
+# cargo
+export PATH="$HOME/.cargo/bin:$PATH"
 
 # auto-envs
 eval "$(direnv hook zsh)"
