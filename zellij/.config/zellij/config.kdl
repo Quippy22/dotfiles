@@ -1,5 +1,5 @@
 // Zellij Configuration - Red-Blue Fusion
-// Balanced for stability and speed
+// Extreme Minimalism with "Auto-Normal" logic and working Escape key
 
 theme "red-blue-fusion"
 pane_frames false
@@ -10,32 +10,27 @@ copy_on_select true
 show_startup_tips false
 
 keybinds clear-defaults=true {
-    normal {
-        // Tab navigation (Alt + hl) - Easier access for frequent use
-        bind "Alt h" { GoToPreviousTab; }
-        bind "Alt l" { GoToNextTab; }
+    // All these keys work everywhere (except locked mode) 
+    // and automatically bring you back to NORMAL mode.
+    shared_except "locked" {
+        // Tab navigation (Alt + hl)
+        bind "Alt h" { GoToPreviousTab; SwitchToMode "Normal"; }
+        bind "Alt l" { GoToNextTab; SwitchToMode "Normal"; }
 
-        // Pane navigation (Alt + Shift + hjkl) - Less frequent use
-        bind "Alt H" { MoveFocusOrTab "Left"; }
-        bind "Alt L" { MoveFocusOrTab "Right"; }
-        bind "Alt J" { MoveFocus "Down"; }
-        bind "Alt K" { MoveFocus "Up"; }
+        // Pane navigation (Alt + Shift + hjkl)
+        bind "Alt H" { MoveFocusOrTab "Left"; SwitchToMode "Normal"; }
+        bind "Alt L" { MoveFocusOrTab "Right"; SwitchToMode "Normal"; }
+        bind "Alt J" { MoveFocus "Down"; SwitchToMode "Normal"; }
+        bind "Alt K" { MoveFocus "Up"; SwitchToMode "Normal"; }
 
         // Window/Pane Management
-        bind "Ctrl q" { Detach; }
-        bind "Alt n" { NewPane "Right"; }
-        bind "Alt d" { NewPane "Down"; }
-        bind "Alt t" { NewTab; }
-        bind "Alt w" { CloseFocus; }
+        bind "Alt n" { NewPane "Right"; SwitchToMode "Normal"; }
+        bind "Alt d" { NewPane "Down"; SwitchToMode "Normal"; }
+        bind "Alt t" { NewTab; SwitchToMode "Normal"; }
+        bind "Alt w" { CloseFocus; SwitchToMode "Normal"; }
         bind "Alt r" { SwitchToMode "RenameTab"; TabNameInput 0; }
-        bind "Alt f" { ToggleFloatingPanes; }
-        bind "Alt z" { ToggleFocusFullscreen; }
-
-        // System interactions
-        bind "y" { Write 121; } 
-        bind "n" { Write 110; }
-        bind "q" { Write 113; }
-        bind "Esc" { SwitchToMode "Normal"; }
+        bind "Alt f" { ToggleFloatingPanes; SwitchToMode "Normal"; }
+        bind "Alt z" { ToggleFocusFullscreen; SwitchToMode "Normal"; }
 
         // Help / Binds (Alt + /)
         bind "Alt /" {
@@ -45,9 +40,11 @@ keybinds clear-defaults=true {
                 width "60%"
                 height "60%"
             };
+            SwitchToMode "Normal";
         }
 
-        // Session Manager
+        // Sessions
+        bind "Ctrl q" { Detach; }
         bind "Ctrl s" {
             LaunchOrFocusPlugin "zellij:session-manager" {
                 floating true
@@ -56,6 +53,8 @@ keybinds clear-defaults=true {
             SwitchToMode "Normal";
         }
     }
+
+    // Specific mode handlers
     renametab {
         bind "Enter" { SwitchToMode "Normal"; }
         bind "Esc" { UndoRenameTab; SwitchToMode "Normal"; }
