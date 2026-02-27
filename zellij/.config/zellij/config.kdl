@@ -1,0 +1,79 @@
+// Zellij Configuration - Red-Blue Fusion
+// Balanced for stability and speed
+
+theme "red-blue-fusion"
+pane_frames false
+simplified_ui true
+default_layout "default"
+mouse_mode true
+copy_on_select true
+show_startup_tips false
+
+keybinds clear-defaults=true {
+    normal {
+        // Tab navigation (Alt + hl) - Easier access for frequent use
+        bind "Alt h" { GoToPreviousTab; }
+        bind "Alt l" { GoToNextTab; }
+
+        // Pane navigation (Alt + Shift + hjkl) - Less frequent use
+        bind "Alt H" { MoveFocusOrTab "Left"; }
+        bind "Alt L" { MoveFocusOrTab "Right"; }
+        bind "Alt J" { MoveFocus "Down"; }
+        bind "Alt K" { MoveFocus "Up"; }
+
+        // Window/Pane Management
+        bind "Ctrl q" { Detach; }
+        bind "Alt n" { NewPane "Right"; }
+        bind "Alt d" { NewPane "Down"; }
+        bind "Alt t" { NewTab; }
+        bind "Alt w" { CloseFocus; }
+        bind "Alt r" { SwitchToMode "RenameTab"; TabNameInput 0; }
+        bind "Alt f" { ToggleFloatingPanes; }
+        bind "Alt z" { ToggleFocusFullscreen; }
+
+        // System interactions
+        bind "y" { Write 121; } 
+        bind "n" { Write 110; }
+        bind "q" { Write 113; }
+        bind "Esc" { SwitchToMode "Normal"; }
+
+        // Help / Binds (Alt + /)
+        bind "Alt /" {
+            Run "cat" "/home/darius/.config/zellij/help.txt" {
+                floating true
+                close_on_exit false
+                width "60%"
+                height "60%"
+            };
+        }
+
+        // Session Manager
+        bind "Ctrl s" {
+            LaunchOrFocusPlugin "zellij:session-manager" {
+                floating true
+                move_to_focused_pane true
+            };
+            SwitchToMode "Normal";
+        }
+    }
+    renametab {
+        bind "Enter" { SwitchToMode "Normal"; }
+        bind "Esc" { UndoRenameTab; SwitchToMode "Normal"; }
+    }
+}
+
+themes {
+    "red-blue-fusion" {
+        fg "#c0caf5"
+        bg "#1a1b26"
+        black "#15161e"
+        red "#f03030"
+        green "#73daca"
+        yellow "#e0af68"
+        blue "#7aa2f7"
+        magenta "#f7439a"
+        cyan "#7dcfff"
+        white "#c0caf5"
+        orange "#ff9e64"
+    }
+}
