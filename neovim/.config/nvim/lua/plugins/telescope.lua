@@ -19,6 +19,9 @@ return {
             vim.keymap.set("n", "<leader>fg", function()
                 builtin.live_grep({})
             end, { desc = "Live grep" })
+            vim.keymap.set("n", "<leader>?", function()
+                builtin.keymaps({})
+            end, { desc = "Search Keymaps" })
         end,
     },
     {

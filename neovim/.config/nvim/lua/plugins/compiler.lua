@@ -28,7 +28,7 @@ return {
         })
 
         -- Keymaps
-        vim.keymap.set("n", "<leader>rr", "<cmd>RunCode<CR>", { noremap = true, silent = true })
-        vim.keymap.set("n", "<leader>rf", "<cmd>RunFile<CR>", { noremap = true, silent = true })
+        vim.keymap.set("n", "<leader>rr", "<cmd>RunCode<CR>", { noremap = true, silent = true, desc = "Compiler: Run Code" })
+        vim.keymap.set("n", "<leader>rf", "<cmd>RunFile<CR>", { noremap = true, silent = true, desc = "Compiler: Run File" })
     end,
 }

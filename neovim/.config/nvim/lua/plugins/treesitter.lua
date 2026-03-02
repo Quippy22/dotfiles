@@ -40,6 +40,6 @@ return {
         })
 
         -- Keymap to yank the current function under the cursor
-        vim.api.nvim_set_keymap("n", "<leader>yf", [[:normal! vaf y<CR>]], { noremap = true, silent = true })
+        vim.keymap.set("n", "<leader>yf", [[:normal! vaf y<CR>]], { noremap = true, silent = true, desc = "Treesitter: Yank Function" })
     end,
 }
