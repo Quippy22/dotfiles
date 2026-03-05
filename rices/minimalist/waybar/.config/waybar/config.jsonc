@@ -9,6 +9,7 @@
         "clock"
     ],
     "modules-right": [
+        "pulseaudio",
         "custom/system",
         "custom/temps",
         "custom/updates",
@@ -19,9 +20,16 @@
         "on-click": "activate"
     },
     "clock": {
+        "timezone": "Europe/Bucharest",
         "format": "{:%H:%M:%S}",
         "interval": 1,
-        "tooltip-format": "{:%Y-%m-%d}"
+        "tooltip-format": "{:%Y-%m-%d}",
+        "locale": "ro_RO.utf-8"
+    },
+    "pulseaudio": {
+        "format": "VOL: {volume}%",
+        "format-muted": "MUTED",
+        "on-click": "pavucontrol"
     },
     "custom/updates": {
         "interval": 1800,
