@@ -38,7 +38,7 @@ done
 
 # --- RELOAD LOGIC (No restart) ---
 
-# 1. Reload Hyprland (Theme values are updated via source = ~/.config/hypr/theme.conf)
+# 1. Reload Hyprland
 hyprctl reload
 
 # 2. Restart Waybar
@@ -49,7 +49,13 @@ waybar & disown
 # 3. Reload Kitty
 killall -USR1 kitty 2>/dev/null
 
-# 4. Optional: Reload SwayNC
+# 4. Reload Hyprpaper
+# Kill and restart to pick up new config properly
+killall hyprpaper 2>/dev/null
+sleep 0.1
+hyprpaper & disown
+
+# 5. Optional: Reload SwayNC
 swaync-client -rs 2>/dev/null
 
 echo "Rice '$RICE' applied successfully!"
