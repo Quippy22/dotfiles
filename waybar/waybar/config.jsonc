@@ -50,7 +50,7 @@
         "return-type": "json",
         "tooltip": "Available Updates",
         "format": "{}",
-        "on-click": "kitty -e yay -Syu"
+        "on-click": "kitty -e yay -Syu --noconfirm --ignore gemini-cli"
     },
     "custom/lock": {
         "tooltip": false,
