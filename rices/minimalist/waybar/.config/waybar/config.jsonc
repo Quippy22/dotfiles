@@ -1,7 +1,7 @@
 {
     "layer": "top",
     "position": "bottom",
-    "height": 30,
+    "height": 24,
     "modules-left": [
         "hyprland/workspaces"
     ],
@@ -15,15 +15,12 @@
         "custom/poweroff"
     ],
     "hyprland/workspaces": {
-        "format": "| {name} |",
-        "active-only": false,
-        "all-outputs": true,
-        "format-icons": {
-            "default": ""
-        }
+        "format": "{name}",
+        "on-click": "activate"
     },
     "clock": {
-        "format": "{:%H:%M}",
+        "format": "{:%H:%M:%S}",
+        "interval": 1,
         "tooltip-format": "{:%Y-%m-%d}"
     },
     "custom/updates": {
