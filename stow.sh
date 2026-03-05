@@ -1,20 +1,17 @@
 #!/usr/bin/bash
 
-# A script to stow all dotfile packages
+# A script to stow all core dotfile packages
+# Skipping 'rices' and 'scripts' as they are managed differently
 
 DOTFILES_DIR="$HOME/dotfiles"
-
-# Navigate to the dir
 cd "$DOTFILES_DIR"
 
-# Get a list of all packages
-PACKAGES=$(find . -maxdepth 1 -mindepth 1 -type d -printf "%f\n" | grep -v '^\.git$')
-
-# Loop through each package and stow it
+# Get a list of all packages, excluding those that shouldn't be stowed directly
+PACKAGES=$(find . -maxdepth 1 -mindepth 1 -type d -printf "%f\n" | grep -vE '^\.git$|rices|scripts')
 
 for PACKAGE in $PACKAGES; do
 	echo "stowing package: $PACKAGE"
-	stow "$PACKAGE"
+	stow -R "$PACKAGE"
 done
 
-echo "All packages stowed successfully"
+echo "Core packages stowed successfully"
