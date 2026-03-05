@@ -1,0 +1,109 @@
+* {
+    font-family: "JetBrainsMono Nerd Font", "CaskaydiaMono Nerd Font", monospace;
+    font-size: 20px;
+    min-height: 0;
+    padding-right: 2px;
+    padding-left: 2px;
+    padding-bottom: 0px;
+}
+
+#waybar {
+    background: transparent;
+    color: #c6d0f5;
+    margin: 2px 2px;
+}
+
+/* Workspaces */
+#workspaces {
+    border-radius: 5px;
+    margin: 5px;
+    background: #1b2a47;
+    margin-left: 1rem;
+}
+
+#workspaces button {
+    color: #babbf1;
+    border-radius: 5px;
+    padding: 0.4rem;
+}
+
+#workspaces button.active {
+    color: #99d1db;
+    border-radius: 5px;
+}
+
+#workspaces button:hover {
+    color: #85c1dc;
+    border-radius: 5px;
+}
+
+/* Generic module style */
+#custom-music,
+#tray,
+#backlight,
+#clock,
+#battery,
+#pulseaudio,
+#custom-updates,
+#custom-lock,
+#custom-poweroff,
+#custom-system,
+#custom-temps {
+    background-color: #1b2a47;
+    padding: 0.5rem 1rem;
+    margin: 5px 0;
+    border-radius: 0px 5px 5px 0px;
+    color: #c6d0f5;
+}
+
+/* CPU + RAM usage module */
+#custom-system {
+    border-radius: 5px;
+}
+
+/* CPU + GPU temps module */
+#custom-temps {
+    border-radius: 5px;
+    margin-left: 1rem;
+}
+
+/* Individual modules */
+#clock {
+    color: #8caaee;
+    border-radius: 5px;
+    margin-right: 1rem;
+}
+#pulseaudio {
+    color: #ea999c;
+    border-radius: 5px 0px 0px 5%;
+    margin-left: 1rem;
+}
+
+#custom-music {
+    color: #ca9ee6;
+    border-radius: 5px;
+}
+
+#custom-updates {
+    color: #babbf1;
+    border-radius: 5px 0px 0px 5px;
+    padding-right: 0.5rem;
+}
+
+#custom-lock {
+    border-radius: 0;
+    color: #babbf1;
+}
+
+#custom-poweroff {
+    margin-right: 1rem;
+    border-radius: 0px 5px 5px 0px;
+    color: #babbf1;
+}
+
+#tray {
+    margin-right: 1rem;
+    margin-left: 1rem;
+    border-radius: 5px;
+}
+

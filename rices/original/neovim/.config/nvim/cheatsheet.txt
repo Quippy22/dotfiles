@@ -1,0 +1,64 @@
+## UI & Navigation @ui
+<C-n>                    | Toggle Neo-tree
+<leader>gg               | Open GitUI (Floating)
+<leader>n                | Open Yazi (File Manager)
+<leader>;                | Toggle Terminal (Horizontal)
+<leader>t                | Toggle Undotree
+<leader>yf               | Treesitter: Yank Function
+<leader>m                | TreeSJ: Toggle Split/Join
+<leader>j                | TreeSJ: Join
+<leader>s                | TreeSJ: Split
+
+## Search & Discovery @search
+<C-p>                    | Find Files (Telescope)
+<leader>fg               | Live Grep (Telescope)
+<leader>st               | Search Todo Comments
+<leader>?                | Search this Cheatsheet
+
+## Git Operations @git
+<leader>ts               | Toggle Git Signs (Lines at numbers)
+]t                       | Next Todo Comment
+[t                       | Previous Todo Comment
+
+## LSP & Editing @lsp
+K                        | LSP: Hover Information
+gd                       | LSP: Go to Definition
+<leader>gf               | Format File (Conform)
+<leader>y                | Yank selection to system clipboard (Visual)
+
+## Debugging (DAP) @dap
+<leader>dt               | DAP: Toggle Breakpoint
+<leader>dc               | DAP: Continue
+<leader>do               | DAP: Step Over
+<leader>di               | DAP: Step Into
+<leader>ds               | DAP: Step Out
+<leader>du               | DAP: Toggle UI
+<leader>dr               | DAP: Open REPL
+
+## Compiler & Runner @run
+<leader>rr               | Compiler: Run Code
+<leader>rf               | Compiler: Run File
+
+## Quickfix & Lists @vim
+:copen                   | Open Quickfix Window
+:cclose                  | Close Quickfix Window
+:cnext                   | Next Quickfix Item
+:cprev                   | Previous Quickfix Item
+:noh                     | Clear Search Highlights
+
+## Splits & Movement @ui
+<C-h>                    | Move to split left
+<C-j>                    | Move to split down
+<C-k>                    | Move to split up
+<C-l>                    | Move to split right
+<C-Up>                   | Resize split up
+<C-Down>                 | Resize split down
+<C-Left>                 | Resize split left
+<C-Right>                | Resize split right
+
+## Markdown @peek
+:PeekOpen                | Open Markdown Preview
+:PeekClose               | Close Markdown Preview
+
+## Terminal @term
+<esc>                    | Exit Terminal Mode (in ToggleTerm)
