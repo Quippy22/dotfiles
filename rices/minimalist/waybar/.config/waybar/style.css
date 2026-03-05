@@ -34,20 +34,30 @@ window#waybar {
     background-color: #080808;
 }
 
-#custom-system,
-#custom-temps,
-#custom-updates,
-#custom-poweroff,
-#clock {
+/* Stats Colors */
+#custom-system {
+    color: #8be9fd;
     padding: 0 10px;
-    color: #ffffff;
+}
+
+#custom-temps {
+    color: #ffb86c;
+    padding: 0 10px;
+}
+
+#custom-updates {
+    color: #bd93f9;
+    padding: 0 10px;
 }
 
 #clock {
+    padding: 0 10px;
+    color: #f8f8f2;
     font-weight: bold;
     font-size: 12px;
 }
 
 #custom-poweroff {
-    color: #cc241d;
+    padding: 0 10px;
+    color: #ff5555;
 }

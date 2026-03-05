@@ -31,9 +31,10 @@ PACKAGES=$(find . -maxdepth 1 -mindepth 1 -type d -printf "%f\n")
 # -R: Restow (unstow then stow)
 # -d: Base directory (the rice package directory)
 # -t: Target directory (Home)
+# --adopt: Automatically adopt existing files (handles conflicts by moving them to the dotfiles repo)
 for PACKAGE in $PACKAGES; do
     echo "stowing $PACKAGE..."
-    stow -R "$PACKAGE" -d "$RICES_DIR/$RICE" -t "$HOME"
+    stow --adopt -R "$PACKAGE" -d "$RICES_DIR/$RICE" -t "$HOME"
 done
 
 # --- RELOAD LOGIC (No restart) ---
@@ -50,7 +51,6 @@ waybar & disown
 killall -USR1 kitty 2>/dev/null
 
 # 4. Reload Hyprpaper
-# Kill and restart to pick up new config properly
 killall hyprpaper 2>/dev/null
 sleep 0.1
 hyprpaper & disown
