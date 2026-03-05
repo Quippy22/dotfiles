@@ -8,6 +8,7 @@
         "clock"
     ],
     "modules-right": [
+        "hyprland/language",
         "pulseaudio",
         "custom/system",
         "custom/temps",
@@ -22,6 +23,11 @@
             "active": "",
             "default": ""
         }
+    },
+    "hyprland/language": {
+        "format": "{}",
+        "format-en": "US",
+        "format-ro": "RO"
     },
     "tray": {
         "icon-size": 21,
