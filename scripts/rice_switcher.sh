@@ -34,11 +34,9 @@ for PACKAGE in $PACKAGES; do
     stow -D "$PACKAGE" -d "$RICES_DIR/original" -t "$HOME" 2>/dev/null
     stow -D "$PACKAGE" -d "$RICES_DIR/minimalist" -t "$HOME" 2>/dev/null
     
-    # Force remove broken symlinks that might block stow
-    # This is safe because we are targeting specific config folders or files
-    # Only remove if it's a symlink (to avoid deleting real files by mistake)
-    if [ -L "$HOME/.config/$PACKAGE" ]; then
-        rm "$HOME/.config/$PACKAGE"
+    # Force remove broken symlinks OR real directories that should be symlinks
+    if [ -L "$HOME/.config/$PACKAGE" ] || [ -d "$HOME/.config/$PACKAGE" ]; then
+        rm -rf "$HOME/.config/$PACKAGE"
     fi
     
     # Stow the rice version
