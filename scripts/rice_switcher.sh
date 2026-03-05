@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Rice Switcher Script
+# Surgical Rice Switcher Script
 # Usage: ./rice_switcher.sh <rice_name>
 
 RICE=$1
@@ -21,41 +21,50 @@ fi
 
 echo "Switching to rice: $RICE..."
 
-# Navigate to the specific rice directory
+# 1. Identify which packages this rice provides
 cd "$RICES_DIR/$RICE"
-
-# Get a list of packages in this rice
 PACKAGES=$(find . -maxdepth 1 -mindepth 1 -type d -printf "%f\n")
 
-# Stow each package (forcing overwrite of existing symlinks)
-# -R: Restow (unstow then stow)
-# -d: Base directory (the rice package directory)
-# -t: Target directory (Home)
-# --adopt: Automatically adopt existing files (handles conflicts by moving them to the dotfiles repo)
+# 2. For each package in the target rice, swap out the symlink
 for PACKAGE in $PACKAGES; do
-    echo "stowing $PACKAGE..."
+    echo "Swapping $PACKAGE..."
+    
+    # Try to unstow from any possible rice source to be safe
+    # We use full paths to avoid ambiguity
+    stow -D "$PACKAGE" -d "$RICES_DIR/original" -t "$HOME" 2>/dev/null
+    stow -D "$PACKAGE" -d "$RICES_DIR/minimalist" -t "$HOME" 2>/dev/null
+    
+    # Force remove broken symlinks that might block stow
+    # This is safe because we are targeting specific config folders or files
+    # Only remove if it's a symlink (to avoid deleting real files by mistake)
+    if [ -L "$HOME/.config/$PACKAGE" ]; then
+        rm "$HOME/.config/$PACKAGE"
+    fi
+    
+    # Stow the rice version
     stow --adopt -R "$PACKAGE" -d "$RICES_DIR/$RICE" -t "$HOME"
 done
 
-# --- RELOAD LOGIC (No restart) ---
+# --- RELOAD LOGIC ---
 
 # 1. Reload Hyprland
 hyprctl reload
 
 # 2. Restart Waybar
-killall waybar 2>/dev/null
-sleep 0.2
-waybar & disown
+if command -v waybar >/dev/null; then
+    killall waybar 2>/dev/null
+    sleep 0.5
+    waybar & disown
+fi
 
 # 3. Reload Kitty
 killall -USR1 kitty 2>/dev/null
 
 # 4. Reload Hyprpaper
-killall hyprpaper 2>/dev/null
-sleep 0.1
-hyprpaper & disown
+if command -v hyprpaper >/dev/null; then
+    killall hyprpaper 2>/dev/null
+    sleep 0.5
+    hyprpaper & disown
+fi
 
-# 5. Optional: Reload SwayNC
-swaync-client -rs 2>/dev/null
-
-echo "Rice '$RICE' applied successfully!"
+echo "Rice '$RICE' applied surgically!"
