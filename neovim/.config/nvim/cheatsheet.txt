@@ -16,7 +16,7 @@
 <leader>?                | Search this Cheatsheet
 
 ## Git Operations @git
-<leader>ts               | Toggle Git Signs (Lines at numbers)
+<leader>gs               | Toggle Git Signs (Lines at numbers)
 ]t                       | Next Todo Comment
 [t                       | Previous Todo Comment
 

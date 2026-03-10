@@ -6,7 +6,7 @@ return {
         local gs = package.loaded.gitsigns
 
         -- Toggle the lines at the numbers
-        vim.keymap.set("n", "<leader>ts", gs.toggle_signs, { 
+        vim.keymap.set("n", "<leader>gs", gs.toggle_signs, { 
             buffer = bufnr, 
             desc = "Toggle Git signs" 
         })

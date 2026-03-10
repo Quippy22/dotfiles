@@ -2,7 +2,7 @@
 
 # Master Stow Script
 # 1. Stows shared packages (Zsh, Neovim, etc.)
-# 2. Applies the 'original' rice for the UI components
+# 2. Applies the 'sunset' rice for the UI components
 
 DOTFILES_DIR="$HOME/dotfiles"
 cd "$DOTFILES_DIR"
@@ -15,7 +15,7 @@ for PACKAGE in "${SHARED_PACKAGES[@]}"; do
     if [ -d "$PACKAGE" ]; then
         echo "Stowing $PACKAGE..."
         # Force cleanup from any previous stows to ensure root ownership
-        stow -D "$PACKAGE" -d "$DOTFILES_DIR/rices/original" -t "$HOME" 2>/dev/null
+        stow -D "$PACKAGE" -d "$DOTFILES_DIR/rices/sunset" -t "$HOME" 2>/dev/null
         stow -D "$PACKAGE" -d "$DOTFILES_DIR/rices/minimalist" -t "$HOME" 2>/dev/null
         
         # Manually remove common files if they are real files (to avoid stow aborting)
@@ -27,9 +27,9 @@ for PACKAGE in "${SHARED_PACKAGES[@]}"; do
 done
 
 echo ""
-echo "--- Applying Default Rice (Original) ---"
+echo "--- Applying Default Rice (Sunset) ---"
 if [ -f "./scripts/rice_switcher.sh" ]; then
-    ./scripts/rice_switcher.sh original
+    ./scripts/rice_switcher.sh sunset
 else
     echo "Error: rice_switcher.sh not found!"
 fi

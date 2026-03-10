@@ -31,7 +31,7 @@ for PACKAGE in $PACKAGES; do
     
     # Try to unstow from any possible rice source to be safe
     # We use full paths to avoid ambiguity
-    stow -D "$PACKAGE" -d "$RICES_DIR/original" -t "$HOME" 2>/dev/null
+    stow -D "$PACKAGE" -d "$RICES_DIR/sunset" -t "$HOME" 2>/dev/null
     stow -D "$PACKAGE" -d "$RICES_DIR/minimalist" -t "$HOME" 2>/dev/null
     
     # Force remove broken symlinks OR real directories that should be symlinks
