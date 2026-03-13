@@ -8,7 +8,6 @@ default_layout "default"
 mouse_mode true
 copy_on_select true
 show_startup_tips false
-on_force_close "quit"
 
 keybinds clear-defaults=true {
     // All these keys work everywhere (except locked mode) 
@@ -35,9 +34,9 @@ keybinds clear-defaults=true {
 
         // Help / Binds (Alt + /)
         bind "Alt /" {
-            Run "less" "/home/darius/.config/zellij/help.txt" {
+            Run "cat" "/home/darius/.config/zellij/help.txt" {
                 floating true
-                close_on_exit true
+                close_on_exit false
                 width "60%"
                 height "60%"
             };

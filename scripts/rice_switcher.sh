@@ -29,18 +29,21 @@ PACKAGES=$(find . -maxdepth 1 -mindepth 1 -type d -printf "%f\n")
 for PACKAGE in $PACKAGES; do
     echo "Swapping $PACKAGE..."
     
-    # Try to unstow from any possible rice source to be safe
-    # We use full paths to avoid ambiguity
-    stow -D "$PACKAGE" -d "$RICES_DIR/sunset" -t "$HOME" 2>/dev/null
-    stow -D "$PACKAGE" -d "$RICES_DIR/minimalist" -t "$HOME" 2>/dev/null
-    
-    # Force remove broken symlinks OR real directories that should be symlinks
+    # Force remove current symlink or directory to ensure clean stow
     if [ -L "$HOME/.config/$PACKAGE" ] || [ -d "$HOME/.config/$PACKAGE" ]; then
         rm -rf "$HOME/.config/$PACKAGE"
     fi
     
+    # Extra cleanup for Hyprland package which has top-level files
+    if [ "$PACKAGE" == "hyprland" ]; then
+        rm -f "$HOME/.Xresources" "$HOME/.gtkrc-2.0"
+        rm -rf "$HOME/.config/gtk-3.0"
+        # We MUST ensure the directory itself is gone so stow doesn't conflict
+        rm -rf "$HOME/.config/hypr"
+    fi
+    
     # Stow the rice version
-    stow --adopt -R "$PACKAGE" -d "$RICES_DIR/$RICE" -t "$HOME"
+    stow -R "$PACKAGE" -d "$RICES_DIR/$RICE" -t "$HOME"
 done
 
 # --- RELOAD LOGIC ---
