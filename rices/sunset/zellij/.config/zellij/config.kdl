@@ -34,9 +34,9 @@ keybinds clear-defaults=true {
 
         // Help / Binds (Alt + /)
         bind "Alt /" {
-            Run "cat" "/home/darius/.config/zellij/help.txt" {
+            Run "less" "/home/darius/.config/zellij/help.txt" {
                 floating true
-                close_on_exit false
+                close_on_exit true
                 width "60%"
                 height "60%"
             };
