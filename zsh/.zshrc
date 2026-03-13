@@ -84,6 +84,8 @@ export PATH="$HOME/Coding/Scripts:$PATH"
 export PATH="$HOME/.npm-global/bin:$PATH"
 # cargo
 export PATH="$HOME/.cargo/bin:$PATH"
+# local bin
+export PATH="$HOME/.local/bin:$PATH"
 
 # auto-envs
 eval "$(direnv hook zsh)"
