@@ -58,7 +58,7 @@ setopt hist_ignore_dups
 setopt hist_find_no_dups
 
 #-- Aliases
-alias ls='ls --color'
+alias ls='lsd'
 alias c='clear'
 alias q='exit'
 
