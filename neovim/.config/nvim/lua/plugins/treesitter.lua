@@ -1,9 +1,12 @@
+pcall(function() require('nvim-treesitter.install').prefer_git = true end)
 return {
     "nvim-treesitter/nvim-treesitter",
+    branch = "master",
     build = ":TSUpdate",
     event = "BufReadPre",
 
     config = function()
+        require('nvim-treesitter.install').prefer_git = true
         require("nvim-treesitter.configs").setup({
             ensure_installed = {
                 "c",
