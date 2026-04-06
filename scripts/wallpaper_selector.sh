@@ -4,7 +4,7 @@
 WALLPAPER_DIR="$HOME/Images/wallpapers"
 
 # 1. Select wallpaper
-SELECTED_WALL=$(ls "$WALLPAPER_DIR" | grep -E ".jpg$|.png$|.jpeg$" | wofi --show dmenu --layer=overlay --prompt "Select Wallpaper:")
+SELECTED_WALL=$(ls "$WALLPAPER_DIR" | grep -E ".jpg$|.png$|.jpeg$" | wofi --show dmenu --prompt "Select Wallpaper:")
 
 if [ -z "$SELECTED_WALL" ]; then
     exit 0
@@ -19,7 +19,7 @@ SOURCE_CONFIG=$(readlink -f "$CONFIG_LINK")
 # Write using the BLOCK syntax your version of hyprpaper expects
 cat <<EOF > "$SOURCE_CONFIG"
 wallpaper {
-    monitor =
+    monitor = DP-1
     path = $FULL_PATH
     fit_mode = cover
 }
