@@ -1,43 +1,69 @@
-pcall(function() require('nvim-treesitter.install').prefer_git = true end)
 return {
     "nvim-treesitter/nvim-treesitter",
-    branch = "master",
+    branch = "main",
     build = ":TSUpdate",
-    event = "BufReadPre",
-
+    event = "VeryLazy",
+    dependencies = {
+        "nvim-treesitter/nvim-treesitter-textobjects",
+    },
     config = function()
-        require('nvim-treesitter.install').prefer_git = true
-        require("nvim-treesitter.configs").setup({
-            ensure_installed = {
-                "c",
-                "cpp",
-                "lua",
-                "vim",
-                "vimdoc",
-                "query",
-                "python",
-                "javascript",
-                "html",
-            },
+        local ts = require("nvim-treesitter")
+        local install = require("nvim-treesitter.install")
+        local config = require("nvim-treesitter.config")
 
-            sync_install = false,
-            auto_install = true,
+        ts.setup({})
 
-            highlight = {
+        -- Preferred parsers to always have
+        local languages = {
+            "c", "cpp", "lua", "vim", "vimdoc", "query", "python", 
+            "javascript", "html", "markdown", "markdown_inline", "bash", "yaml", "json",
+        }
+        ts.install(languages)
+
+        -- Helper to auto-install missing parsers
+        local function auto_install(lang)
+            if not lang then return end
+            local installed = config.get_installed()
+            if not vim.list_contains(installed, lang) then
+                -- Check if it's a valid parser first
+                local parsers = require("nvim-treesitter.parsers")
+                if parsers[lang] then
+                    vim.notify("Treesitter: Auto-installing '" .. lang .. "'...")
+                    ts.install(lang)
+                end
+            end
+        end
+
+        -- Enable highlighting, indentation, and auto-install
+        vim.api.nvim_create_autocmd("FileType", {
+            callback = function(args)
+                local bufnr = args.buf
+                local ft = vim.bo[bufnr].filetype
+                local lang = vim.treesitter.language.get_lang(ft) or ft
+                
+                -- Attempt auto-install
+                auto_install(lang)
+
+                if lang then
+                    pcall(vim.treesitter.start, bufnr, lang)
+                    vim.bo[bufnr].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+                end
+            end,
+        })
+
+        -- Incremental selection
+        vim.keymap.set("n", "<c-space>", "v", { desc = "Treesitter: Init Selection" })
+
+        -- Configure textobjects
+        require("nvim-treesitter-textobjects").setup({
+            select = {
                 enable = true,
-            },
-
-            -- Add textobjects
-            textobjects = {
-                select = {
-                    enable = true,
-                    lookahead = true, -- Automatically jump forward to textobj
-                    keymaps = {
-                        ["af"] = "@function.outer",
-                        ["if"] = "@function.inner",
-                        ["ac"] = "@class.outer",
-                        ["ic"] = "@class.inner",
-                    },
+                lookahead = true,
+                keymaps = {
+                    ["af"] = "@function.outer",
+                    ["if"] = "@function.inner",
+                    ["ac"] = "@class.outer",
+                    ["ic"] = "@class.inner",
                 },
             },
         })
