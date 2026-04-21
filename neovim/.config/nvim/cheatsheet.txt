@@ -1,5 +1,5 @@
 ## UI & Navigation @ui
-<C-n>                    | Toggle Neo-tree
+<C-n>                    | Oil: Open parent directory
 <leader>gg               | Open GitUI (Floating)
 <leader>n                | Open Yazi (File Manager)
 <leader>;                | Toggle Terminal (Horizontal)
@@ -62,3 +62,22 @@ gd                       | LSP: Go to Definition
 
 ## Terminal @term
 <esc>                    | Exit Terminal Mode (in ToggleTerm)
+
+## Oil (File Explorer) @oil
+<C-n>                    | Open Oil (Parent Directory)
+-                        | Go to parent directory
+<CR>                     | Select (Open) file/directory
+<C-s>                    | Open in vertical split
+<C-h>                    | Open in horizontal split
+<C-t>                    | Open in new tab
+<C-p>                    | Preview
+<C-c>                    | Close Oil
+<C-l>                    | Refresh
+_                        | Open current working directory
+`                        | Change directory (cd)
+~                        | Change tab directory (tcd)
+gs                       | Change sort
+gx                       | Open external
+g.                       | Toggle hidden files
+g\                       | Toggle trash
+g?                       | Show help

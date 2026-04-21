@@ -23,12 +23,6 @@ return {
                 hl(0, "SignColumn", { bg = "none" })
                 hl(0, "VertSplit", { bg = "none" })
 
-                -- neotree transparency
-                hl(0, "NeoTreeNormal", { bg = "none" })
-                hl(0, "NeoTreeNormalNC", { bg = "none" })
-                hl(0, "NeoTreeEndOfBuffer", { bg = "none" })
-                hl(0, "NeoTreeWinSeparator", { bg = "none" })
-
                 -- telescope transparency
                 hl(0, "TelescopeNormal", { bg = "none" })
                 hl(0, "TelescopeBorder", { bg = "none" })
