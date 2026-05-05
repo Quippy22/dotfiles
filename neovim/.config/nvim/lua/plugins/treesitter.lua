@@ -16,7 +16,7 @@ return {
         -- Preferred parsers to always have
         local languages = {
             "c", "cpp", "lua", "vim", "vimdoc", "query", "python", 
-            "javascript", "html", "markdown", "markdown_inline", "bash", "yaml", "json",
+            "javascript", "html", "markdown", "markdown_inline", "bash", "yaml", "json", "rust",
         }
         ts.install(languages)
 

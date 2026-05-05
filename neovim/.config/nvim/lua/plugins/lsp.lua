@@ -77,6 +77,33 @@ return {
 						"javascriptreact",
 						"vue",
 						"php",
+						"rust",
+					}
+					server_opts.settings = {
+						tailwindCSS = {
+							includeLanguages = {
+								rust = "html",
+							},
+							experimental = {
+								classRegex = {
+									{ "class:?\\s*=\\s*\"([^\"]*)\"", "([\\w%\\-.:]+)" },
+								},
+							},
+						},
+					}
+				elseif server_name == "html" then
+					server_opts.filetypes = { "html", "rust" }
+				elseif server_name == "rust_analyzer" then
+					server_opts.settings = {
+						["rust-analyzer"] = {
+							procMacro = {
+								ignored = {
+									leptos_macro = {
+										"server",
+									},
+								},
+							},
+						},
 					}
 				end
 				vim.lsp.config(server_name, server_opts)
