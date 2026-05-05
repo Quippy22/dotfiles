@@ -61,6 +61,7 @@ setopt hist_find_no_dups
 alias ls='lsd'
 alias c='clear'
 alias q='exit'
+alias z='zellij'
 alias tauri-dev='GDK_BACKEND=x11 WEBKIT_DISABLE_COMPOSITING_MODE=1 LIBGL_ALWAYS_SOFTWARE=1 cargo tauri dev'
 alias tauri-android-dev='JAVA_HOME=/usr/lib/jvm/java-17-openjdk cargo tauri android dev'
 
