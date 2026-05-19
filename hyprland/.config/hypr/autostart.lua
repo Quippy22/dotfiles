@@ -19,6 +19,7 @@ hl.on("hyprland.start", function ()
   hl.exec_cmd("[workspace 3 silent] youtube-music")
   hl.exec_cmd('sh -c "hyprctl dispatch workspace 3; discord & sleep 5; hyprctl dispatch workspace 1"')
   hl.exec_cmd("hyprctl dispatch workspace 1")
+  hl.exec_cmd("[workspace special:persist silent] kitty --class persist-term")
 
   -- Dark themes
   hl.exec_cmd('gsettings set org.gnome.desktop.interface color-scheme "prefer-dark"')

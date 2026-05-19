@@ -15,10 +15,12 @@ hl.on("hyprland.start", function ()
 
   -- Apps
   hl.exec_cmd("[workspace 3 silent] youtube-music")
-  hl.exec_cmd('sh -c "hyprctl dispatch workspace 3; discord & sleep 5; hyprctl dispatch workspace 1"')
+  hl.exec_cmd("sh -c \"hyprctl dispatch workspace 3; discord & sleep 5; hyprctl dispatch workspace 1\"")
   hl.exec_cmd("hyprctl dispatch workspace 1")
+  hl.exec_cmd("[workspace special:persist silent] kitty --class persist-term")
 
   -- Theme
+
   hl.exec_cmd('gsettings set org.gnome.desktop.interface color-scheme "prefer-dark"')
   hl.exec_cmd('gsettings set org.gnome.desktop.interface gtk-theme "Arc-Dark"')
   hl.exec_cmd('gsettings set org.gnome.desktop.interface cursor-theme "Nordzy-cursors"')

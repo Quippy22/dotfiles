@@ -20,3 +20,11 @@ hl.window_rule({
     },
     no_focus = true,
 })
+
+hl.window_rule({
+    name  = "persist-term",
+    match = { class = "persist-term" },
+    float = true,
+    size  = "3420 450",
+    move  = "10 980",
+})

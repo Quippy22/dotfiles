@@ -36,7 +36,7 @@ end
 -- Personal
 hl.bind(mainMod .. " + S", hl.dsp.exec_cmd("hyprshot -m region -o ~/Images/screenshots -c"))
 hl.bind(mainMod .. " + SHIFT + S", hl.dsp.exec_cmd("hyprshot -m window ~/Images/screenshots -c"))
-hl.bind(mainMod .. " + SHIFT + RETURN", hl.dsp.exec_cmd("kitty --class utility"))
+hl.bind(mainMod .. " + SHIFT + RETURN", hl.dsp.workspace.toggle_special("persist"))
 hl.bind(mainMod .. " + T", hl.dsp.exec_cmd("~/dotfiles/scripts/rice_selector.sh"))
 
 -- Mouse

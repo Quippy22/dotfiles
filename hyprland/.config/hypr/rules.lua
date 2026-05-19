@@ -22,6 +22,14 @@ hl.window_rule({
 })
 
 hl.window_rule({
+    name  = "persist-term",
+    match = { class = "persist-term" },
+    float = true,
+    size  = "3420 450",
+    move  = "10 980",
+})
+
+hl.window_rule({
     name  = "move-hyprland-run",
     match = { class = "hyprland-run" },
     move  = "20 monitor_h-120",
