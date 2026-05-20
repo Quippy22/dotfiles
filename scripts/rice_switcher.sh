@@ -28,20 +28,30 @@ PACKAGES=$(find . -maxdepth 1 -mindepth 1 -type d -printf "%f\n")
 # 2. For each package in the target rice, swap out the symlink
 for PACKAGE in $PACKAGES; do
     echo "Swapping $PACKAGE..."
-    
+
+    if [ "$PACKAGE" == "hyprland" ]; then
+        if [ -L "$HOME/.config/hypr" ]; then
+            rm -rf "$HOME/.config/hypr"
+            mkdir -p "$HOME/.config/hypr"
+        fi
+
+        stow -R hyprland -d "$DOTFILES_DIR" -t "$HOME"
+
+        for OTHER_RICE in "$RICES_DIR"/*; do
+            if [ -d "$OTHER_RICE/hyprland" ]; then
+                stow -D hyprland -d "$OTHER_RICE" -t "$HOME" 2>/dev/null
+            fi
+        done
+
+        stow -R hyprland -d "$RICES_DIR/$RICE" -t "$HOME"
+        continue
+    fi
+
     # Force remove current symlink or directory to ensure clean stow
     if [ -L "$HOME/.config/$PACKAGE" ] || [ -d "$HOME/.config/$PACKAGE" ]; then
         rm -rf "$HOME/.config/$PACKAGE"
     fi
-    
-    # Extra cleanup for Hyprland package which has top-level files
-    if [ "$PACKAGE" == "hyprland" ]; then
-        rm -f "$HOME/.Xresources" "$HOME/.gtkrc-2.0"
-        rm -rf "$HOME/.config/gtk-3.0"
-        # We MUST ensure the directory itself is gone so stow doesn't conflict
-        rm -rf "$HOME/.config/hypr"
-    fi
-    
+
     # Stow the rice version
     stow -R "$PACKAGE" -d "$RICES_DIR/$RICE" -t "$HOME"
 done
@@ -66,6 +76,8 @@ if command -v hyprpaper >/dev/null; then
     killall hyprpaper 2>/dev/null
     sleep 0.5
     hyprpaper & disown
+    sleep 0.5
+    "$DOTFILES_DIR/scripts/apply_hypr_style.sh"
 fi
 
 echo "Rice '$RICE' applied surgically!"

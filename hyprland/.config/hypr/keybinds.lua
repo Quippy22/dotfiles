@@ -3,49 +3,57 @@
 ---------------------
 
 local mainMod = "SUPER"
-local terminal    = "kitty"
-local fileManager = "nautilus"
-local menu        = "wofi --show drun --layer=overlay"
+local style = require("style")
+local terminal    = style.apps.terminal
+local fileManager = style.apps.file_manager
+local menu        = style.apps.launcher
+local persistTerm = style.persistent_terminal
+local resizeStep  = style.resize
 
 local function toggle_persist_term()
+    local specialName = persistTerm.workspace:gsub("^special:", "")
+
     for _, window in ipairs(hl.get_windows()) do
-        if window.class == "persist-term" then
-            hl.dispatch(hl.dsp.workspace.toggle_special("persist"))
+        if window.class == persistTerm.class then
+            hl.dispatch(hl.dsp.workspace.toggle_special(specialName))
             return
         end
     end
 
     local activeSpecial = hl.get_active_special_workspace()
-    if activeSpecial == nil or activeSpecial.name ~= "persist" then
-        hl.dispatch(hl.dsp.workspace.toggle_special("persist"))
+    if activeSpecial == nil or activeSpecial.name ~= specialName then
+        hl.dispatch(hl.dsp.workspace.toggle_special(specialName))
     end
 
-    hl.exec_cmd("kitty --class persist-term")
+    hl.exec_cmd(string.format("%s --class %s", terminal, persistTerm.class))
 end
 
-local function resize_from_edge(dx, dy)
+local function smart_resize(dx, dy)
     return function()
         local window = hl.get_active_window()
         local isFloating = window ~= nil and (window.floating == true or window.float == true)
+        local step = isFloating and resizeStep.float_step or resizeStep.tiled_step
+        local scaledX = dx == 0 and 0 or (dx > 0 and step or -step)
+        local scaledY = dy == 0 and 0 or (dy > 0 and step or -step)
 
-        hl.dispatch(hl.dsp.window.resize({ x = dx, y = dy, relative = true }))
+        hl.dispatch(hl.dsp.window.resize({ x = scaledX, y = scaledY, relative = true }))
 
         if not isFloating then
             return
         end
 
-        if dx ~= 0 then
+        if scaledX ~= 0 then
             hl.dispatch(hl.dsp.window.move({
-                x = math.floor(-dx / 2),
+                x = math.floor(-scaledX / 2),
                 y = 0,
                 relative = true,
             }))
         end
 
-        if dy ~= 0 then
+        if scaledY ~= 0 then
             hl.dispatch(hl.dsp.window.move({
                 x = 0,
-                y = math.floor(-dy / 2),
+                y = math.floor(-scaledY / 2),
                 relative = true,
             }))
         end
@@ -75,10 +83,10 @@ hl.bind(mainMod .. " + SHIFT + K", hl.dsp.window.move({ direction = "up" }))
 hl.bind(mainMod .. " + SHIFT + J", hl.dsp.window.move({ direction = "down" }))
 
 -- Resize windows with mainMod + ALT + hjkl
-hl.bind(mainMod .. " + ALT + H", resize_from_edge(-40, 0), { repeating = true })
-hl.bind(mainMod .. " + ALT + L", resize_from_edge(40, 0), { repeating = true })
-hl.bind(mainMod .. " + ALT + K", resize_from_edge(0, -40), { repeating = true })
-hl.bind(mainMod .. " + ALT + J", resize_from_edge(0, 40), { repeating = true })
+hl.bind(mainMod .. " + ALT + H", smart_resize(-1, 0), { repeating = true })
+hl.bind(mainMod .. " + ALT + L", smart_resize(1, 0), { repeating = true })
+hl.bind(mainMod .. " + ALT + K", smart_resize(0, -1), { repeating = true })
+hl.bind(mainMod .. " + ALT + J", smart_resize(0, 1), { repeating = true })
 
 -- Switch workspaces with mainMod + [0-9]
 for i = 1, 10 do

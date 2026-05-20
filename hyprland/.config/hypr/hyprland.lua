@@ -1,5 +1,7 @@
 -- Hyprland Lua Modular Config
 
+local style = require("style")
+
 require("env")
 require("monitors")
 require("settings")
@@ -9,5 +11,5 @@ require("keybinds")
 hl.layer_rule({
     name = "waybar-order",
     match = { namespace = "waybar" },
-    order = -1,
+    order = style.waybar.order,
 })
