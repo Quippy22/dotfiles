@@ -26,5 +26,6 @@ hl.window_rule({
     match = { class = "persist-term" },
     float = true,
     size  = "3420 450",
-    move  = "10 980",
+    move  = "20 970",
+    workspace = "special:persist",
 })
