@@ -1,0 +1,95 @@
+{
+    "ui_font_family": "JetBrainsMono Nerd Font",
+    "buffer_font_family": "JetBrainsMono Nerd Font",
+    "ui_font_size": 18,
+    "buffer_font_size": 16,
+    "agent_ui_font_size": 16,
+    "agent_buffer_font_size": 16,
+    "vim_mode": true,
+    "relative_line_numbers": "enabled",
+    "cursor_blink": false,
+    "tab_size": 4,
+    "auto_indent": "syntax_aware",
+    "auto_indent_on_paste": false,
+    "lsp_document_colors": "background",
+    "seed_search_query_from_cursor": "never",
+    "show_whitespaces": "none",
+    "format_on_save": "off",
+    "extend_comment_on_newline": false,
+    "horizontal_scroll_margin": 2,
+    "vertical_scroll_margin": 2,
+    "when_closing_with_no_tabs": "keep_window_open",
+    "restore_on_file_reopen": true,
+    "restore_on_startup": "empty_tab",
+    "use_autoclose": false,
+    "icon_theme": "Light Charmed Icons",
+    "theme": "Tokyo Night",
+    "theme_overrides": {
+        "Tokyo Night": {
+            "players": [
+                {
+                    "cursor": "#5D9FDE",
+                },
+            ],
+            "syntax": {
+                "comment": {
+                    "font_style": "italic",
+                },
+                "comment.doc": {
+                    "font_style": "italic",
+                },
+            },
+            "editor.line_number": "#274864",
+        },
+    },
+    "title_bar": {
+        "show_onboarding_banner": false,
+        "show_branch_name": false,
+    },
+    "tab_bar": {
+        "show": false,
+    },
+    "toolbar": {
+        "quick_actions": false,
+    },
+    "status_bar": {
+        "experimental.show": false,
+    },
+    "project_panel": {
+        "indent_size": 23.0,
+        "dock": "left",
+        "default_width": 400,
+    },
+    "file_finder": {
+        "modal_max_width": "medium",
+    },
+    "scrollbar": {
+        "show": "never",
+    },
+    "gutter": {
+        "min_line_number_digits": 0,
+        "folds": false,
+        "runnables": false,
+    },
+    "drag_and_drop_selection": {
+        "enabled": false,
+    },
+    "session": {
+        "restore_unsaved_buffers": false,
+    },
+    "git": {
+        "git_gutter": "tracked_files",
+        "inline_blame": {
+            "enabled": false,
+        }
+    },
+    "agent": {
+        "default_model": {
+            "provider": "openai",
+            "model": "gpt-5.4",
+            "enable_thinking": false,
+        },
+        "favorite_models": [],
+        "model_parameters": [],
+    },
+}

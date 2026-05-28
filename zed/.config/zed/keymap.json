@@ -1,0 +1,64 @@
+// Zed keymap
+//
+// For information on binding keys, see the Zed
+// documentation: https://zed.dev/docs/key-bindings
+//
+// To see the default key bindings run `zed: open default keymap`
+// from the command palette.
+[
+    {
+        "context": "Workspace",
+        "bindings": {
+            // "shift shift": "file_finder::Toggle"
+        },
+    },
+    {
+        "context": "Editor && vim_mode == insert",
+        "bindings": {
+            // "j k": "vim::NormalBefore"
+        },
+    },
+    {
+        "context": "!Editor",
+        "bindings": {
+            "j": "menu::SelectNext",
+            "k": "menu::SelectPrevious",
+        },
+    },
+    {
+        "context": "Editor && vim_mode == normal",
+        "bindings": {
+            ".": "vim::RepeatFind",
+            "space g f": "editor::Format",
+            "space ;": "terminal_panel::ToggleFocus",
+            "space o": "outline::Toggle",
+            "space w": "pane::CloseActiveItem",
+            "space W": "pane::CloseAllItems",
+            "ctrl-h": "workspace::ActivatePaneLeft",
+            "ctrl-j": "workspace::ActivatePaneDown",
+            "ctrl-k": "workspace::ActivatePaneUp",
+            "ctrl-l": "workspace::ActivatePaneRight",
+        },
+    },
+    {
+        "context": "Terminal",
+        "bindings": {
+            "ctrl-k": "workspace::ActivatePaneUp",
+            "space ;": "terminal_panel::Toggle",
+            "alt-n": "workspace::NewTerminal",
+            "alt-h": "pane::ActivatePreviousItem",
+            "alt-l": "pane::ActivateNextItem",
+        },
+    },
+    {
+        "context": "Editor && vim_mode == normal && terminal_panel_open",
+        "bindings": {
+            "ctrl-j": "terminal_panel::ToggleFocus",
+        },
+    },
+    {
+        "bindings": {
+            "ctrl-n": "project_panel::Toggle",
+        },
+    },
+]
