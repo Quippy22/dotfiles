@@ -7,6 +7,7 @@ require("monitors")
 require("settings")
 require("rules")
 require("autostart")
+require("key-mouse")
 require("keybinds")
 hl.layer_rule({
     name = "waybar-order",
