@@ -1,0 +1,78 @@
+// Zellij Configuration - Red-Blue Fusion
+// Extreme Minimalism with "Auto-Normal" logic and working Escape key
+
+theme "red-blue-fusion"
+pane_frames false
+simplified_ui true
+default_layout "default"
+mouse_mode true
+copy_on_select true
+show_startup_tips false
+
+keybinds clear-defaults=true {
+    // All these keys work everywhere (except locked mode) 
+    // and automatically bring you back to NORMAL mode.
+    shared_except "locked" {
+        // Tab navigation (Alt + hl)
+        bind "Alt h" { GoToPreviousTab; SwitchToMode "Normal"; }
+        bind "Alt l" { GoToNextTab; SwitchToMode "Normal"; }
+
+        // Pane navigation (Alt + Shift + hjkl)
+        bind "Alt H" { MoveFocusOrTab "Left"; SwitchToMode "Normal"; }
+        bind "Alt L" { MoveFocusOrTab "Right"; SwitchToMode "Normal"; }
+        bind "Alt J" { MoveFocus "Down"; SwitchToMode "Normal"; }
+        bind "Alt K" { MoveFocus "Up"; SwitchToMode "Normal"; }
+
+        // Window/Pane Management
+        bind "Alt n" { NewPane "Right"; SwitchToMode "Normal"; }
+        bind "Alt d" { NewPane "Down"; SwitchToMode "Normal"; }
+        bind "Alt t" { NewTab; SwitchToMode "Normal"; }
+        bind "Alt w" { CloseFocus; SwitchToMode "Normal"; }
+        bind "Alt r" { SwitchToMode "RenameTab"; TabNameInput 0; }
+        bind "Alt f" { ToggleFloatingPanes; SwitchToMode "Normal"; }
+        bind "Alt z" { ToggleFocusFullscreen; SwitchToMode "Normal"; }
+
+        // Help / Binds (Alt + /)
+        bind "Alt /" {
+            Run "cat" "/home/darius/.config/zellij/help.txt" {
+                floating true
+                close_on_exit false
+                width "60%"
+                height "60%"
+            };
+            SwitchToMode "Normal";
+        }
+
+        // Sessions
+        bind "Ctrl q" { Detach; }
+        bind "Ctrl s" {
+            LaunchOrFocusPlugin "zellij:session-manager" {
+                floating true
+                move_to_focused_pane true
+            };
+            SwitchToMode "Normal";
+        }
+    }
+
+    // Specific mode handlers
+    renametab {
+        bind "Enter" { SwitchToMode "Normal"; }
+        bind "Esc" { UndoRenameTab; SwitchToMode "Normal"; }
+    }
+}
+
+themes {
+    "red-blue-fusion" {
+        fg "#c0caf5"
+        bg "#1a1b26"
+        black "#15161e"
+        red "#f03030"
+        green "#73daca"
+        yellow "#e0af68"
+        blue "#7aa2f7"
+        magenta "#f7439a"
+        cyan "#7dcfff"
+        white "#c0caf5"
+        orange "#ff9e64"
+    }
+}

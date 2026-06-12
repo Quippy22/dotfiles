@@ -1,0 +1,23 @@
+ZELLIJ CHEAT SHEET
+
+Panes:
+  Alt + Shift + h/j/k/l  : Move Focus
+  Alt + n                : New Pane Right
+  Alt + d                : New Pane Down
+  Alt + w                : Close Pane
+  Alt + f                : Toggle Floating
+  Alt + z                : Toggle Fullscreen
+
+Tabs:
+  Alt + h / l            : Next / Prev Tab
+  Alt + t                : New Tab
+  Alt + r                : Rename Tab
+
+Sessions:
+  Ctrl + s               : Session Manager
+  Ctrl + q               : Detach (Save)
+
+Neovim:
+  Ctrl + h/j/k/l         : Move Focus (Within Nvim)
+
+Press 'q' to close this help.

@@ -1,0 +1,68 @@
+* {
+    font-family: "JetBrainsMono Nerd Font", monospace;
+    font-size: 12px;
+    min-height: 0;
+    padding: 0;
+    margin: 0;
+}
+
+window#waybar {
+    background-color: #000000;
+    color: #ffffff;
+    border-top: 1px solid #111111;
+}
+
+#workspaces {
+    background: transparent;
+}
+
+#workspaces button {
+    color: #444444;
+    padding: 0 8px;
+    border-right: 1px solid #222222;
+    border-radius: 0;
+    transition: all 0.2s ease-in-out;
+}
+
+#workspaces button.active {
+    color: #ffffff;
+    background-color: #111111;
+}
+
+#workspaces button:hover {
+    color: #aaaaaa;
+    background-color: #080808;
+}
+
+/* Stats Colors */
+#pulseaudio {
+    color: #50fa7b;
+    padding: 0 8px;
+}
+
+#custom-system {
+    color: #8be9fd;
+    padding: 0 8px;
+}
+
+#custom-temps {
+    color: #ffb86c;
+    padding: 0 8px;
+}
+
+#custom-updates {
+    color: #bd93f9;
+    padding: 0 8px;
+}
+
+#clock {
+    padding: 0 8px;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+#custom-poweroff {
+    padding: 0 8px;
+    color: #ff5555;
+}
