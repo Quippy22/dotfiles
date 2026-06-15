@@ -13,10 +13,9 @@ hl.on("hyprland.start", function ()
   hl.exec_cmd("sh -c 'sleep 0.2; ~/dotfiles/scripts/apply_hypr_style.sh'")
   hl.exec_cmd("waybar")
   hl.exec_cmd("swaync")
-  hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
+  hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=Hyprland")
   hl.exec_cmd("systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
-  hl.exec_cmd("xdg-desktop-portal-hyprland &")
-  hl.exec_cmd("xdg-desktop-portal &")
+  hl.exec_cmd("/usr/lib/xdg-desktop-portal-hyprland & sleep 2 && /usr/lib/xdg-desktop-portal &")
 
   -- Apps to launch on workspace 3
   hl.exec_cmd("[workspace 3 silent] youtube-music")

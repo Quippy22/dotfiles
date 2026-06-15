@@ -90,5 +90,7 @@ export PATH="$HOME/.cargo/bin:$PATH"
 # local bin
 export PATH="$HOME/.local/bin:$PATH"
 
+export XDG_CURRENT_DESKTOP=Hyprland
+
 # auto-envs
 eval "$(direnv hook zsh)"
