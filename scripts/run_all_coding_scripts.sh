@@ -1,19 +1,136 @@
-#!/usr/bin/env bash
-# Wrapper to run all scripts in /home/darius/Coding/Scripts/automated
+#!/usr/bin/env -S cargo eval
+//! Runs every executable script in ~/Coding/Scripts/automated/ at boot.
+//!
+//! Called from Hyprland's autostart.lua ([workspace 1]).
+//! Each script gets a 5-minute timeout — if one hangs, it's killed so
+//! the rest still run.  stdout/stderr are captured and printed per-script,
+//! and a summary is printed at the end.
+//!
+//! Safety over the original bash version:
+//!   - per-script timeout via poll + kill (bash had none)
+//!   - stdout/stderr captured, not mixed
+//!   - exit codes and timing logged for every script
 
-SCRIPT_DIR="/home/darius/Coding/Scripts/automated"
+use std::fs;
+use std::os::unix::fs::PermissionsExt;
+use std::path::Path;
+use std::process::{Command, Stdio};
+use std::thread;
+use std::time::{Duration, Instant};
 
-# Check if directory exists
-if [ ! -d "$SCRIPT_DIR" ]; then
-    echo "Directory $SCRIPT_DIR not found!"
-    exit 1
-fi
+fn main() {
+    let script_dir = Path::new("/home/darius/Coding/Scripts/automated");
 
-# Iterate over all files in the directory
-for script in "$SCRIPT_DIR"/*; do
-    # Check if it is a file and is executable
-    if [ -f "$script" ] && [ -x "$script" ]; then
-        echo "Running $script..."
-        "$script"
-    fi
-done
+    if !script_dir.exists() {
+        eprintln!("Directory {} not found!", script_dir.display());
+        std::process::exit(1);
+    }
+
+    let timeout = Duration::from_secs(300);
+    let mut results: Vec<(String, bool, String)> = Vec::new();
+
+    let entries = match fs::read_dir(script_dir) {
+        Ok(e) => e,
+        Err(e) => {
+            eprintln!("Failed to read {}: {e}", script_dir.display());
+            std::process::exit(1);
+        }
+    };
+
+    for entry in entries.flatten() {
+        let path = entry.path();
+        if !path.is_file() {
+            continue;
+        }
+
+        let is_exec = fs::metadata(&path)
+            .map(|m| m.permissions().mode() & 0o111 != 0)
+            .unwrap_or(false);
+        if !is_exec {
+            continue;
+        }
+
+        let name = path
+            .file_name()
+            .unwrap()
+            .to_string_lossy()
+            .to_string();
+
+        print!("[{name}] ");
+        let _ = std::io::Write::flush(&mut std::io::stdout());
+
+        let start = Instant::now();
+        let mut child = match Command::new(&path)
+            .stdout(Stdio::piped())
+            .stderr(Stdio::piped())
+            .spawn()
+        {
+            Ok(c) => c,
+            Err(e) => {
+                println!("FAIL (spawn error: {e})");
+                results.push((name, false, format!("spawn error: {e}")));
+                continue;
+            }
+        };
+
+        let status = loop {
+            match child.try_wait() {
+                Ok(Some(s)) => break s,
+                Ok(None) => {
+                    if start.elapsed() >= timeout {
+                        let _ = child.kill();
+                        break child.wait().unwrap_or_default();
+                    }
+                    thread::sleep(Duration::from_millis(100));
+                }
+                Err(e) => {
+                    println!("WAIT ERROR: {e}");
+                    results.push((name.clone(), false, format!("wait error: {e}")));
+                    break child.wait().unwrap_or_default();
+                }
+            }
+        };
+
+        let elapsed = start.elapsed().as_secs();
+        if status.success() {
+            println!("OK ({elapsed}s)");
+            results.push((name, true, format!("{elapsed}s")));
+        } else if elapsed >= timeout.as_secs() {
+            println!("TIMEOUT (killed after {elapsed}s)");
+            results.push((name, false, "TIMEOUT".to_string()));
+        } else {
+            let code = status.code().map_or("?".to_string(), |c| c.to_string());
+            println!("FAIL ({elapsed}s, exit={code})");
+            results.push((name, false, format!("{elapsed}s, exit={code}")));
+        }
+
+        if let Ok(out) = child.wait_with_output() {
+            let stdout = String::from_utf8_lossy(&out.stdout);
+            let stderr = String::from_utf8_lossy(&out.stderr);
+
+            if !stdout.trim().is_empty() {
+                for line in stdout.lines() {
+                    println!("  | {line}");
+                }
+            }
+            if !stderr.trim().is_empty() {
+                for line in stderr.lines() {
+                    eprintln!("  ! {line}");
+                }
+            }
+        }
+    }
+
+    println!();
+    let ok_count = results.iter().filter(|r| r.1).count();
+    let fail_count = results.iter().filter(|r| !r.1).count();
+    println!(
+        "Automated scripts: {ok_count} OK, {fail_count} FAIL \
+         ({} total)",
+        results.len()
+    );
+    for (name, ok, detail) in &results {
+        let mark = if *ok { " OK " } else { "FAIL" };
+        println!("  [{mark}] {name} ({detail})");
+    }
+}
