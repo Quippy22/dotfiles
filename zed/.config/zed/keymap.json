@@ -48,6 +48,7 @@
             "alt-n": "workspace::NewTerminal",
             "alt-h": "pane::ActivatePreviousItem",
             "alt-l": "pane::ActivateNextItem",
+            "alt-w": "pane::CloseActiveItem",
         },
     },
     {
