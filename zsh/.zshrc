@@ -82,7 +82,7 @@ export EDITOR="$VISUAL"
 
 #--- Paths 
 # scripts
-export PATH="$HOME/Coding/Scripts:$PATH"
+export PATH="$HOME/Coding/Scripts/executables:$PATH"
 # npm
 export PATH="$HOME/.npm-global/bin:$PATH"
 # cargo
