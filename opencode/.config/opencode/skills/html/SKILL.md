@@ -344,7 +344,7 @@ If the environment provides the `html-serve` utility, invoke it.
 Command:
 
 ```
-html-serve /absolute/path/to/generated/file.html
+html-serve path/to/generated/file.html
 ```
 
 The command starts (or reuses) a background HTTP server and returns a URL.
@@ -352,7 +352,7 @@ The command starts (or reuses) a background HTTP server and returns a URL.
 Example:
 
 ```
-$ html-serve /tmp/test-tw.html
+$ html-serve test-tw.html
 http://localhost:3333/test-tw.html
 ```
 
