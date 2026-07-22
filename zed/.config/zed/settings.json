@@ -85,8 +85,8 @@
     },
     "agent": {
         "default_model": {
-            "provider": "openai",
-            "model": "gpt-5.4",
+            "provider": "ollama",
+            "model": "qwen2.5-coder:7b",
             "enable_thinking": false,
         },
         "favorite_models": [],
