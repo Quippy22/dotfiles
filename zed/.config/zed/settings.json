@@ -86,8 +86,8 @@
     "agent": {
         "default_model": {
             "provider": "ollama",
-            "model": "qwen2.5-coder:7b",
-            "enable_thinking": false,
+            "model": "qwen3:8b",
+            "enable_thinking": true,
         },
         "favorite_models": [],
         "model_parameters": [],

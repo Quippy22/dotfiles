@@ -3,12 +3,13 @@
 //!
 //! Called from Hyprland's autostart.lua ([workspace 1]).
 //! Each script gets a 5-minute timeout — if one hangs, it's killed so
-//! the rest still run.  stdout/stderr are captured and printed per-script,
-//! and a summary is printed at the end.
+//! the rest still run.  Script stdout/stderr go to /dev/null (they're
+//! background daemons, output is not wanted), and a summary is printed
+//! at the end.
 //!
 //! Safety over the original bash version:
 //!   - per-script timeout via poll + kill (bash had none)
-//!   - stdout/stderr captured, not mixed
+//!   - no output pipe to block on, so orphaned daemons can't strand the runner
 //!   - exit codes and timing logged for every script
 
 use std::fs;
@@ -61,8 +62,8 @@ fn main() {
 
         let start = Instant::now();
         let mut child = match Command::new(&path)
-            .stdout(Stdio::piped())
-            .stderr(Stdio::piped())
+            .stdout(Stdio::null())
+            .stderr(Stdio::null())
             .spawn()
         {
             Ok(c) => c,
@@ -102,22 +103,6 @@ fn main() {
             let code = status.code().map_or("?".to_string(), |c| c.to_string());
             println!("FAIL ({elapsed}s, exit={code})");
             results.push((name, false, format!("{elapsed}s, exit={code}")));
-        }
-
-        if let Ok(out) = child.wait_with_output() {
-            let stdout = String::from_utf8_lossy(&out.stdout);
-            let stderr = String::from_utf8_lossy(&out.stderr);
-
-            if !stdout.trim().is_empty() {
-                for line in stdout.lines() {
-                    println!("  | {line}");
-                }
-            }
-            if !stderr.trim().is_empty() {
-                for line in stderr.lines() {
-                    eprintln!("  ! {line}");
-                }
-            }
         }
     }
 
