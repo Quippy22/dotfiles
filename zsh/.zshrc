@@ -64,6 +64,10 @@ alias q='exit'
 alias z='zellij'
 alias tauri-dev='GDK_BACKEND=x11 WEBKIT_DISABLE_COMPOSITING_MODE=1 LIBGL_ALWAYS_SOFTWARE=1 cargo tauri dev'
 alias tauri-android-dev='JAVA_HOME=/usr/lib/jvm/java-17-openjdk cargo tauri android dev'
+alias gcal="gcalcli"
+alias gcalw="gcalcli calw"
+alias gcalm="gcalcli calm"
+alias gcala="gcalcli agenda"
 
 #-- Shell integrations
 eval "$(fzf --zsh)"
