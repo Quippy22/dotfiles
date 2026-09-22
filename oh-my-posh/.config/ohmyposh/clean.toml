@@ -46,7 +46,7 @@ purple = "#bb9af7"
     env = "CONDA_DEFAULT_ENV"
     template = " λ {{ .EnvValue }}"
 
-        [[blocks.segments]]
+    [[blocks.segments]]
         type = 'text'
         style = 'plain'
         foreground_templates = [
@@ -59,6 +59,7 @@ purple = "#bb9af7"
 [transient_prompt]
     background = 'transparent'
     template = " ❯"
+    right_template = '<white>{{ now | date "15:04:05" }}</>'
     foreground_templates = [
       "{{if gt .Code 0}}p:red{{end}}",
       "{{if eq .Code 0}}p:yellowishgreen{{end}}",
