@@ -16,7 +16,12 @@ return {
 					"html",
 					"tailwindcss",
 					"ruff",
+					"jdtls",
+					"gradle_ls",
 				},
+				-- jdtls is started per-buffer by nvim-jdtls (see plugins/java.lua);
+				-- it needs its own workspace dir, so the generic enable must skip it.
+				automatic_enable = { exclude = { "jdtls" } },
 			})
 			require("mason-tool-installer").setup({
 				ensure_installed = {
@@ -62,6 +67,7 @@ return {
 				"html",
 				"tailwindcss",
 				"ruff",
+				"gradle_ls",
 			}
 			for _, server_name in ipairs(servers) do
 				local server_opts = {

@@ -39,6 +39,14 @@ gd                       | LSP: Go to Definition
 <leader>rr               | Compiler: Run Code
 <leader>rf               | Compiler: Run File
 
+## Java & Gradle @java
+<leader>Gg               | Gradle: Project & task view (needs nvim started at project root)
+<leader>Gf               | Gradle: Favorite commands
+:GradleExec              | Gradle: Run a task (FTC deploy: :TeamCode:installDebug)
+<A-o>                    | Java: Organize Imports (.java buffers only)
+gd                       | Java: Go to Definition (.java / build.gradle buffers)
+K                        | Java: Hover Information (.java / build.gradle buffers)
+
 ## Quickfix & Lists @vim
 :copen                   | Open Quickfix Window
 :cclose                  | Close Quickfix Window
