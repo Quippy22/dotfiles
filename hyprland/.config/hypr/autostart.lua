@@ -18,7 +18,6 @@ hl.on("hyprland.start", function ()
   hl.exec_cmd("/usr/lib/xdg-desktop-portal-hyprland & sleep 2 && /usr/lib/xdg-desktop-portal &")
 
   -- Apps to launch on workspace 3
-  hl.exec_cmd("[workspace 3 silent] youtube-music")
   hl.exec_cmd("discord")
   hl.exec_cmd([[sh -c 'sleep 2; hyprctl dispatch workspace 1']])
   hl.exec_cmd("~/dotfiles/scripts/run_all_coding_scripts.sh")
