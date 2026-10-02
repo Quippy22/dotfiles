@@ -96,5 +96,9 @@ export PATH="$HOME/.local/bin:$PATH"
 
 export XDG_CURRENT_DESKTOP=Hyprland
 
+#-- Environment variables
+export CLICKER_PLATFORM=hyprland
+export YDOTOOL_SOCKET=/run/ydotoold/socket
+
 # auto-envs
 eval "$(direnv hook zsh)"
