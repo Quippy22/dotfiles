@@ -62,7 +62,7 @@ alias ls='lsd'
 alias c='clear'
 alias q='exit'
 alias z='zellij'
-alias tauri-dev='GDK_BACKEND=x11 WEBKIT_DISABLE_COMPOSITING_MODE=1 LIBGL_ALWAYS_SOFTWARE=1 cargo tauri dev'
+alias tauri-dev='GDK_BACKEND=x11 WEBKIT_DISABLE_COMPOSITING_MODE=1 LIBGL_ALWAYS_SOFTWARE=1 WEBKIT_DISABLE_DMABUF_RENDERER=1 cargo tauri dev'
 alias tauri-android-dev='JAVA_HOME=/usr/lib/jvm/java-17-openjdk cargo tauri android dev'
 alias gcal="gcalcli"
 alias gcalw="gcalcli calw"
@@ -102,3 +102,7 @@ export YDOTOOL_SOCKET=/run/ydotoold/socket
 
 # auto-envs
 eval "$(direnv hook zsh)"
+
+
+# Added by Antigravity CLI installer
+export PATH="/home/darius/.local/bin:$PATH"
