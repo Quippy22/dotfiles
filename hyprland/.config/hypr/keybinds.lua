@@ -101,6 +101,10 @@ hl.bind(mainMod .. " + SHIFT + S", hl.dsp.exec_cmd("hyprshot -m window ~/Images/
 hl.bind(mainMod .. " + SHIFT + RETURN", toggle_persist_term)
 hl.bind(mainMod .. " + T", hl.dsp.exec_cmd("~/dotfiles/scripts/rice_selector.sh"))
 hl.bind(mainMod .. " + SHIFT + B", hl.dsp.exec_cmd("~/dotfiles/scripts/wallpaper_selector.sh"))
+hl.bind(mainMod .. " + question",    hl.dsp.exec_cmd("~/dotfiles/scripts/keybinds_help.sh"))
+hl.bind(mainMod .. " + slash",       hl.dsp.exec_cmd("~/dotfiles/scripts/keybinds_help.sh"))
+hl.bind(mainMod .. " + SHIFT + slash", hl.dsp.exec_cmd("~/dotfiles/scripts/keybinds_help.sh"))
+
 
 -- Scroll through existing workspaces with mainMod + scroll
 hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
@@ -122,3 +126,10 @@ hl.bind("XF86AudioNext",  hl.dsp.exec_cmd("playerctl next"),       { locked = tr
 hl.bind("XF86AudioPause", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
 hl.bind("XF86AudioPlay",  hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
 hl.bind("XF86AudioPrev",  hl.dsp.exec_cmd("playerctl previous"),   { locked = true })
+
+-- Optional Rice / Shell Extra Keybinds Hook (modular integration)
+local ok_extra, extra_binds = pcall(require, "extra-keybinds")
+if ok_extra and type(extra_binds) == "function" then
+    extra_binds(mainMod)
+end
+

@@ -61,18 +61,33 @@ done
 # 1. Reload Hyprland
 hyprctl reload
 
-# 2. Restart Waybar
-if command -v waybar >/dev/null; then
+# 2. Shell Management (Waybar vs Serpantinum)
+if [ "$RICE" == "serpantinum" ]; then
     killall waybar 2>/dev/null
-    sleep 0.5
-    waybar & disown
+    killall swaync 2>/dev/null
+    if command -v serpantinumd >/dev/null 2>&1; then
+        serpantinumd stop 2>/dev/null
+        sleep 0.5
+        serpantinumd start & disown
+    fi
+else
+    # Stopping serpantinum if it was running
+    if command -v serpantinumd >/dev/null 2>&1; then
+        serpantinumd stop 2>/dev/null
+    fi
+    # Restart Waybar
+    if command -v waybar >/dev/null; then
+        killall waybar 2>/dev/null
+        sleep 0.5
+        waybar & disown
+    fi
 fi
 
 # 3. Reload Kitty
 killall -USR1 kitty 2>/dev/null
 
 # 4. Reload Hyprpaper
-if command -v hyprpaper >/dev/null; then
+if [ "$RICE" != "serpantinum" ] && command -v hyprpaper >/dev/null; then
     killall hyprpaper 2>/dev/null
     sleep 0.5
     hyprpaper & disown
