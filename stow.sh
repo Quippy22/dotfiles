@@ -8,7 +8,7 @@ DOTFILES_DIR="$HOME/dotfiles"
 cd "$DOTFILES_DIR"
 
 # List of shared packages that are NOT rice-specific
-SHARED_PACKAGES=("zsh" "neovim" "tmux" "oh-my-posh" "fastfetch" "hyprland" "zed")
+SHARED_PACKAGES=("zsh" "neovim" "tmux" "oh-my-posh" "fastfetch" "hyprland" "zed" "serpantinum")
 
 echo "--- Cleaning and Stowing Shared Packages ---"
 for PACKAGE in "${SHARED_PACKAGES[@]}"; do

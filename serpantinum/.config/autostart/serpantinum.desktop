@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Serpantinum Desktop Shell
+Exec=sh -c 'if [ "$(lua -e "package.path=\"$HOME/.config/hypr/?.lua;\"..package.path; print(require(\"style\").shell)")" = "serpantinum" ]; then serpantinumd start; fi'
+Hidden=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=true
