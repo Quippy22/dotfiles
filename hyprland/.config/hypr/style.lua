@@ -13,6 +13,11 @@ local style = {
         terminal = "kitty",
         file_manager = "nautilus",
         launcher = "wofi --show drun --layer=overlay",
+        lock = "hyprlock",
+        clipboard = "cliphist list | wofi --dmenu | cliphist decode | wl-copy",
+        calendar = "wofi --show drun",
+        dashboard = "wofi --show drun",
+        settings = "wofi --show drun",
         gtk_theme = "Arc-Dark",
     },
 

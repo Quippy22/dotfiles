@@ -7,6 +7,11 @@ local style = require("style")
 local terminal    = style.apps.terminal
 local fileManager = style.apps.file_manager
 local menu        = style.apps.launcher
+local lockCmd     = style.apps.lock or "serpantinum lock"
+local clipboard   = style.apps.clipboard
+local calendar    = style.apps.calendar
+local dashboard   = style.apps.dashboard
+local settings    = style.apps.settings
 local persistTerm = style.persistent_terminal
 local resizeStep  = style.resize
 
@@ -69,6 +74,30 @@ hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + SPACE", hl.dsp.exec_cmd(menu))
 hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
 hl.bind(mainMod .. " + R", hl.dsp.layout("togglesplit"))
+
+-- Lockscreen
+if lockCmd then
+    hl.bind(mainMod .. " + ESCAPE", hl.dsp.exec_cmd(lockCmd), { locked = true })
+    hl.bind(mainMod .. " + ALT + L", hl.dsp.exec_cmd(lockCmd), { locked = true })
+    hl.bind("XF86PowerOff", hl.dsp.exec_cmd(lockCmd), { locked = true })
+end
+
+-- Clipboard, Calendar, Dashboard, Settings
+if clipboard then
+    hl.bind(mainMod .. " + SHIFT + V", hl.dsp.exec_cmd(clipboard))
+    hl.bind(mainMod .. " + Y",         hl.dsp.exec_cmd(clipboard))
+end
+if calendar then
+    hl.bind(mainMod .. " + N",         hl.dsp.exec_cmd(calendar))
+    hl.bind(mainMod .. " + ALT + C",   hl.dsp.exec_cmd(calendar))
+end
+if dashboard then
+    hl.bind(mainMod .. " + B",         hl.dsp.exec_cmd(dashboard))
+    hl.bind(mainMod .. " + I",         hl.dsp.exec_cmd(dashboard))
+end
+if settings then
+    hl.bind(mainMod .. " + comma",     hl.dsp.exec_cmd(settings))
+end
 
 -- Move focus with mainMod + hjkl
 hl.bind(mainMod .. " + H",  hl.dsp.focus({ direction = "left" }))

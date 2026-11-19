@@ -3,6 +3,12 @@ return {
 
     apps = {
         launcher = "serpantinum msg toggle launcher",
+        file_manager = "ski",
+        lock = "serpantinum lock",
+        clipboard = "serpantinum msg toggle clipboard",
+        calendar = "serpantinum msg toggle calendar",
+        dashboard = "serpantinum msg toggle system",
+        settings = "serpantinum settings",
         gtk_theme = "Arc-Dark",
     },
 

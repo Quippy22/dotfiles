@@ -1,10 +1,32 @@
 {
   "general": {
     "language": "en",
-    "avatarPath": "",
+    "avatarPath": "/home/darius/Images/Screenshot_20250909_230124_TikTok.jpg",
     "muteSfx": false,
     "weatherInterval": 30,
-    "weatherUnit": "metric"
+    "weatherUnit": "metric",
+    "location": {
+      "ip": "2a02:2f05:6714:c200:a25:6ceb:78f6:3ce0",
+      "latitude": 44.316812,
+      "longitude": 23.800031,
+      "city": "Craiova",
+      "region": "Dolj",
+      "region_code": "DJ",
+      "country_name": "Romania",
+      "country_code": "RO",
+      "postal": "200060",
+      "timezone": "Europe/Bucharest",
+      "utc_offset": "+0200",
+      "currency": "RON",
+      "languages": "ro,hu,rom",
+      "asn": "AS8708",
+      "org": "DIGI ROMANIA S.A.",
+      "source": "ipapi.co",
+      "updated_at": 1795116514
+    },
+    "sfxVolume": 2,
+    "quickactions": true,
+    "screenshotCaptureOnRelease": true
   },
   "syspanel": {
     "clipExpandProgress": 0,
@@ -12,11 +34,11 @@
     "clipState": 1
   },
   "bar": {
-    "position": "top",
+    "position": "bottom",
     "width": 100,
-    "height": 40,
+    "height": 34,
     "opacity": 100,
-    "style": "fill", 
+    "style": "fill",
     "time": {
       "format": "HH:mm:ss"
     },
@@ -26,36 +48,82 @@
       "left": [
         "left",
         "workspaces",
-        "media" 
+        "media"
       ],
-     "center": [
+      "center": [
         [
           "timedate",
-          "info",
-          "weather"
+          "info"
         ]
-      ],      
-     "right": [
-        "tray",
+      ],
+      "right": [
         [
+          "sysmon",
           "kb",
-          "wifi",
-          "bt",
-          "vol",
-          "bat"
+          "vol"
         ]
       ]
-    }
+    },
+    "distinctPills": false,
+    "centerByEdges": true,
+    "groupColors": {
+      "g_timedate": "#bc8cff",
+      "g_kb": "#d2a8ff",
+      "g_sysmon": "#58a6ff"
+    },
+    "menuStyle": "icon",
+    "workspaceCount": 10,
+    "hideEmptyWorkspaces": true,
+    "workspaces": {
+      "perMonitorNumbering": false,
+      "monitors": {
+        "DP-1": {
+          "first": 1,
+          "count": 10
+        }
+      }
+    },
+    "workspacesStyle": "numbers",
+    "timeStyle": "classic",
+    "sysmonStyle": "circle",
+    "mediaShowIcon": true,
+    "mediaShowControls": true,
+    "mediaHideWhenIdle": true,
+    "mediaWidth": 94
   },
   "theme": {
-    "fontFamily": "Adwaita Mono",
+    "fontFamily": "JetBrains Mono",
     "borderRadius": 10,
     "activePreset": "Matugen",
     "matugen": true,
-    "mode": "dark"
+    "mode": "dark",
+    "colors": {
+      "base": "#0d1117",
+      "blue": "#58a6ff",
+      "crust": "#010409",
+      "green": "#3fb950",
+      "mantle": "#010409",
+      "maroon": "#f85149",
+      "mauve": "#bc8cff",
+      "overlay0": "#484f58",
+      "overlay1": "#6e7681",
+      "overlay2": "#8b949e",
+      "peach": "#f0883e",
+      "pink": "#d2a8ff",
+      "red": "#f85149",
+      "sapphire": "#388bfd",
+      "subtext0": "#8b949e",
+      "subtext1": "#b1bac4",
+      "surface0": "#161b22",
+      "surface1": "#21262d",
+      "surface2": "#30363d",
+      "teal": "#39c5cf",
+      "text": "#c9d1d9",
+      "yellow": "#d29922"
+    }
   },
   "idle": {
-    "enabled": true,
+    "enabled": false,
     "actions": {
       "dim": {
         "id": "dim",
@@ -97,13 +165,17 @@
         "resumeCommand": "",
         "isCustom": false
       }
-    }
+    },
+    "lockOnSleep": false,
+    "manualInhibit": false,
+    "caffeineStartTime": 0,
+    "caffeineEndTime": 0
   },
   "notifications": {
     "dnd": true,
     "position": "top right",
     "sound": true,
-    "soundFile": ""
+    "soundFile": "/home/darius/dotfiles/serpantinum/.local/share/serpantinum/src/assets/sounds/notifications/Botanica.wav"
   },
   "display": {
     "monitors": {
@@ -114,7 +186,7 @@
     }
   },
   "dock": {
-    "enabled": true,
+    "enabled": false,
     "position": "bottom",
     "onTop": true,
     "elementSize": 44,
@@ -133,10 +205,10 @@
         "icon": "kitty"
       },
       {
-        "name": "Files",
-        "comment": "Access and organize files",
-        "desktop_id": "ski",
-        "icon": "ski"
+        "name": "Brave Origin",
+        "comment": "Access the Internet",
+        "desktop_id": "brave-origin",
+        "icon": "brave-origin"
       }
     ],
     "overrideBoundsCorrection": false,
@@ -151,5 +223,54 @@
     "showRunningIndicators": true,
     "showRunningApps": false,
     "runningScope": "auto"
+  },
+  "wallpaperDir": "/home/darius/Pictures/Wallpapers",
+  "wallpaperTransition": {
+    "mode": "custom",
+    "pool": [
+      "fade",
+      "circle",
+      "swipe",
+      "paint"
+    ],
+    "effects": {
+      "fade": {
+        "duration": 1000
+      },
+      "wipe": {
+        "duration": 1600,
+        "orientation": "random"
+      },
+      "circle": {
+        "duration": 1600,
+        "origin": "random"
+      },
+      "swipe": {
+        "duration": 1600,
+        "direction": "random"
+      },
+      "paint": {
+        "duration": 2400
+      }
+    }
+  },
+  "screenshotDir": "/home/darius/Pictures/Screenshots",
+  "launcher": {
+    "position": "center",
+    "width": 600,
+    "itemCount": 6,
+    "terminalCommand": "kitty -e",
+    "smartRanking": true,
+    "searchProvider": "google"
+  },
+  "lockscreen": {
+    "fingerprintEnabled": true,
+    "attemptLimitEnabled": false,
+    "passwordMaxAttempts": 5,
+    "fingerprintMaxAttempts": 5,
+    "backgroundMode": "follow",
+    "customBackground": "",
+    "promptBackdropMode": "wallpaper"
   }
 }
+
