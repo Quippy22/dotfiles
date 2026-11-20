@@ -127,6 +127,13 @@ QtObject {
                     desc: typeof I18n !== "undefined" ? I18n.t("guide.bar.modules.timedate.style.badge", "Pill-capsule segmented cards") : "Pill-capsule segmented cards",
                     icon: "󰃰",
                     face: "faces/timedate/BadgeFace.qml"
+                },
+                "simple": {
+                    id: "simple",
+                    name: typeof I18n !== "undefined" ? I18n.t("guide.bar.modules.timedate.style.name.simple", "Simple") : "Simple",
+                    desc: typeof I18n !== "undefined" ? I18n.t("guide.bar.modules.timedate.style.simple", "Clean HH:mm:ss clock without date") : "Clean HH:mm:ss clock without date",
+                    icon: "󰥔",
+                    face: "faces/timedate/SimpleFace.qml"
                 }
             }
         },
