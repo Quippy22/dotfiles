@@ -1,13 +1,3 @@
-local function deep_merge(base, override)
-    for key, value in pairs(override) do
-        if type(base[key]) == "table" and type(value) == "table" then
-            deep_merge(base[key], value)
-        else
-            base[key] = value
-        end
-    end
-end
-
 local style = {
     shell = "serpantinum",
 
@@ -141,10 +131,5 @@ local style = {
         },
     },
 }
-
-local ok, rice = pcall(require, "rice")
-if ok and type(rice) == "table" then
-    deep_merge(style, rice)
-end
 
 return style

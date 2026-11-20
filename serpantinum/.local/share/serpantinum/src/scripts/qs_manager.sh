@@ -10,15 +10,22 @@ source "$SCRIPT_DIR/caching.sh" 2>/dev/null || true
 source "$SCRIPT_DIR/config.sh" 2>/dev/null || true
 source "$SCRIPT_DIR/i18n.sh" 2>/dev/null || true
 
+if [ -z "$MAIN_QML" ]; then
+    export MAIN_QML="$(find "$SCRIPT_DIR/../quickshell" -type f \( -name "Shell.qml" -o -name "Bar.qml" \) 2>/dev/null | head -n 1)"
+fi
+
 ACTION="$1"
 TARGET="$2"
 SUBTARGET="$3"
 
 send_qs_ipc() {
+    local cmd="${1:-}"
+    local target="${2:-}"
+    local arg="${3:-}"
     if [[ -n "$MAIN_QML" ]]; then
-        quickshell -p "$MAIN_QML" ipc call main handleCommand "$@" >/dev/null 2>&1
+        quickshell -p "$MAIN_QML" ipc call main handleCommand "$cmd" "$target" "$arg" >/dev/null 2>&1
     else
-        quickshell ipc call main handleCommand "$@" >/dev/null 2>&1
+        quickshell ipc call main handleCommand "$cmd" "$target" "$arg" >/dev/null 2>&1
     fi
 }
 

@@ -8,6 +8,10 @@ fi
 
 source "$SCRIPT_DIR/caching.sh" 2>/dev/null || true
 
+if [ -z "$MAIN_QML" ]; then
+    export MAIN_QML="$(find "$SCRIPT_DIR/../quickshell" -type f \( -name "Shell.qml" -o -name "Bar.qml" \) 2>/dev/null | head -n 1)"
+fi
+
 ACTION="open"
 case "$1" in
     open|toggle|close) ACTION="$1"; shift ;;

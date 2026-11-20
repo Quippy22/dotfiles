@@ -4,7 +4,12 @@
 
 -- See https://wiki.hypr.land/Configuring/Advanced-and-Cool/Environment-variables/
 
-hl.env("PATH", os.getenv("HOME") .. "/.local/bin:" .. (os.getenv("PATH") or ""))
+local home = os.getenv("HOME") or ""
+local current_path = os.getenv("PATH") or ""
+local local_bin = home .. "/.local/bin"
+if not current_path:find(local_bin, 1, true) then
+    hl.env("PATH", local_bin .. ":" .. current_path)
+end
 hl.env("HYPRCURSOR_THEME", "Nordzy-hyprcursors")
 hl.env("HYPRCURSOR_SIZE", "24")
 hl.env("XCURSOR_THEME", "Nordzy-cursors")

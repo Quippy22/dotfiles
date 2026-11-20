@@ -73,17 +73,18 @@ hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
 hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + SPACE", hl.dsp.exec_cmd(menu))
+hl.bind(mainMod .. " + D",     hl.dsp.exec_cmd(menu))
 hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
 hl.bind(mainMod .. " + R", hl.dsp.layout("togglesplit"))
 
 -- Lockscreen
 if lockCmd then
-    hl.bind(mainMod .. " + ESCAPE", hl.dsp.exec_cmd(lockCmd), { locked = true })
+    hl.bind(mainMod .. " + ESCAPE",  hl.dsp.exec_cmd(lockCmd), { locked = true })
     hl.bind(mainMod .. " + ALT + L", hl.dsp.exec_cmd(lockCmd), { locked = true })
-    hl.bind("XF86PowerOff", hl.dsp.exec_cmd(lockCmd), { locked = true })
+    hl.bind("XF86PowerOff",          hl.dsp.exec_cmd(lockCmd), { locked = true })
 end
 
--- Clipboard, Calendar, Dashboard, Settings
+-- Serpantinum Shell Widgets & Control Center
 if clipboard then
     hl.bind(mainMod .. " + SHIFT + V", hl.dsp.exec_cmd(clipboard))
     hl.bind(mainMod .. " + Y",         hl.dsp.exec_cmd(clipboard))
@@ -98,10 +99,21 @@ end
 if dashboard then
     hl.bind(mainMod .. " + B",         hl.dsp.exec_cmd(dashboard))
     hl.bind(mainMod .. " + I",         hl.dsp.exec_cmd(dashboard))
+    hl.bind(mainMod .. " + ALT + D",   hl.dsp.exec_cmd(dashboard))
 end
 if settings then
     hl.bind(mainMod .. " + comma",     hl.dsp.exec_cmd(settings))
 end
+
+-- Serpantinum Extra Controls
+hl.bind(mainMod .. " + SHIFT + B", hl.dsp.exec_cmd("serpantinum msg toggle wallpaper"))
+hl.bind(mainMod .. " + ALT + W",   hl.dsp.exec_cmd("serpantinum msg toggle wallpaper"))
+hl.bind(mainMod .. " + ALT + M",   hl.dsp.exec_cmd("serpantinum msg toggle music"))
+hl.bind(mainMod .. " + ALT + B",   hl.dsp.exec_cmd("serpantinum msg bar autohide"))
+hl.bind(mainMod .. " + ALT + N",   hl.dsp.exec_cmd("serpantinum msg toggle network"))
+hl.bind(mainMod .. " + ALT + V",   hl.dsp.exec_cmd("serpantinum msg toggle volume"))
+hl.bind(mainMod .. " + ALT + E",   hl.dsp.exec_cmd("serpantinum redactor"))
+hl.bind(mainMod .. " + ALT + R",   hl.dsp.exec_cmd("serpantinum reload"))
 
 -- Move focus with mainMod + hjkl
 hl.bind(mainMod .. " + H",  hl.dsp.focus({ direction = "left" }))
@@ -132,10 +144,15 @@ end
 hl.bind(mainMod .. " + S", hl.dsp.exec_cmd("hyprshot -m region -o ~/Images/screenshots -c"))
 hl.bind(mainMod .. " + SHIFT + S", hl.dsp.exec_cmd("hyprshot -m window ~/Images/screenshots -c"))
 hl.bind(mainMod .. " + SHIFT + RETURN", toggle_persist_term)
-hl.bind(mainMod .. " + SHIFT + B", hl.dsp.exec_cmd("serpantinum msg toggle wallpaper"))
 hl.bind(mainMod .. " + question",    hl.dsp.exec_cmd("~/dotfiles/scripts/keybinds_help.sh"))
 hl.bind(mainMod .. " + slash",       hl.dsp.exec_cmd("~/dotfiles/scripts/keybinds_help.sh"))
 hl.bind(mainMod .. " + SHIFT + slash", hl.dsp.exec_cmd("~/dotfiles/scripts/keybinds_help.sh"))
+
+-- Screenshots (Hardware PrintScreen keys)
+hl.bind("Print",                hl.dsp.exec_cmd("serpantinum screenshot --edit"),        { locked = true })
+hl.bind("SHIFT + Print",        hl.dsp.exec_cmd("serpantinum screenshot"),               { locked = true })
+hl.bind(mainMod .. " + Print",  hl.dsp.exec_cmd("serpantinum screenshot --full"),        { locked = true })
+hl.bind(mainMod .. " + SHIFT + Print", hl.dsp.exec_cmd("serpantinum screenshot --full --edit"), { locked = true })
 
 
 -- Scroll through existing workspaces with mainMod + scroll
@@ -159,9 +176,5 @@ hl.bind("XF86AudioPause", hl.dsp.exec_cmd("playerctl play-pause"), { locked = tr
 hl.bind("XF86AudioPlay",  hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
 hl.bind("XF86AudioPrev",  hl.dsp.exec_cmd("playerctl previous"),   { locked = true })
 
--- Optional Rice / Shell Extra Keybinds Hook (modular integration)
-local ok_extra, extra_binds = pcall(require, "extra-keybinds")
-if ok_extra and type(extra_binds) == "function" then
-    extra_binds(mainMod)
-end
+
 
