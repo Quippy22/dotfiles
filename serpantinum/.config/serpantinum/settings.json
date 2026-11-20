@@ -38,7 +38,7 @@
     "width": 100,
     "height": 34,
     "opacity": 100,
-    "style": "fill",
+    "style": "modular",
     "time": {
       "format": "HH:mm:ss"
     },
@@ -46,7 +46,6 @@
     "autohideTimeout": 1000,
     "modules": {
       "left": [
-        "left",
         "workspaces",
         "media"
       ],
@@ -72,8 +71,8 @@
       "g_sysmon": "#58a6ff"
     },
     "menuStyle": "icon",
-    "workspaceCount": 10,
-    "hideEmptyWorkspaces": true,
+    "workspaceCount": 4,
+    "hideEmptyWorkspaces": false,
     "workspaces": {
       "perMonitorNumbering": false,
       "monitors": {
@@ -83,8 +82,8 @@
         }
       }
     },
-    "workspacesStyle": "numbers",
-    "timeStyle": "classic",
+    "workspacesStyle": "roman",
+    "timeStyle": "simple",
     "sysmonStyle": "circle",
     "mediaShowIcon": true,
     "mediaShowControls": true,
@@ -94,7 +93,8 @@
     "kbStyle": "text",
     "menuItems": [
       "settings"
-    ]
+    ],
+    "mediaInfoMode": "duration"
   },
   "theme": {
     "fontFamily": "JetBrains Mono",
