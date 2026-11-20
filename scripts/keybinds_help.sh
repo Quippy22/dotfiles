@@ -4,8 +4,16 @@
 # Launched via SUPER + ? (SUPER + SHIFT + / or SUPER + /)
 
 is_serpantinum_active() {
-    pgrep -f "serpantinumd" >/dev/null 2>&1 || [ -f "$HOME/.local/state/serpantinum/active" ]
+    pgrep -f "serpantinumd" >/dev/null 2>&1 || pgrep -f "quickshell.*serpantinum" >/dev/null 2>&1 || [ -f "$HOME/.local/state/serpantinum/active" ]
 }
+
+if is_serpantinum_active; then
+    SERP_BIN="$(command -v serpantinum 2>/dev/null || true)"
+    [ -z "$SERP_BIN" ] && [ -x "$HOME/.local/bin/serpantinum" ] && SERP_BIN="$HOME/.local/bin/serpantinum"
+    if [ -n "$SERP_BIN" ]; then
+        exec "$SERP_BIN" msg toggle keybinds
+    fi
+fi
 
 format_line() {
     local key="$1"

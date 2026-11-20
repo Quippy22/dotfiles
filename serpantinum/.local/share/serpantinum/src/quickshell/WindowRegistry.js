@@ -59,6 +59,13 @@ function getWidgetLauncherEntries(i18n) {
             description: tr("widgets.system.desc", "Performance monitor, power, and quick settings"),
             icon: "preferences-system",
             fontIcon: "󰒓"
+        },
+        {
+            id: "keybinds",
+            name: tr("widgets.keybinds.name", "Keybindings"),
+            description: tr("widgets.keybinds.desc", "Browse and search Hyprland & Serpantinum shortcuts"),
+            icon: "preferences-desktop-keyboard-shortcuts",
+            fontIcon: "󰌌"
         }
     ];
 }
@@ -129,6 +136,15 @@ function getLayout(name, mx, my, mw, mh, userScale, barPosition) {
                 "bottom": { anchor: "right" }, 
                 "left": { anchor: "right" }, 
                 "right": { anchor: "left" } 
+            } 
+        },
+        "keybinds": { 
+            w: 880, h: 660, comp: "keybinds/KeybindsPopup.qml", 
+            pos: { 
+                "top": { anchor: "center" }, 
+                "bottom": { anchor: "center" }, 
+                "left": { anchor: "center" }, 
+                "right": { anchor: "center" } 
             } 
         },
         "hidden": { 
