@@ -67,6 +67,13 @@ QtObject {
                     desc: typeof I18n !== "undefined" ? I18n.t("guide.bar.modules.workspaces.style.pacman", "Animated arcade dots") : "Animated arcade dots",
                     icon: "󰮯",
                     face: "faces/workspaces/PacmanFace.qml"
+                },
+                "roman": {
+                    id: "roman",
+                    name: typeof I18n !== "undefined" ? I18n.t("guide.bar.modules.workspaces.style.name.roman", "Roman") : "Roman",
+                    desc: typeof I18n !== "undefined" ? I18n.t("guide.bar.modules.workspaces.style.roman", "Roman numeral indices") : "Roman numeral indices",
+                    icon: "󰎦",
+                    face: "faces/workspaces/RomanFace.qml"
                 }
             }
         },

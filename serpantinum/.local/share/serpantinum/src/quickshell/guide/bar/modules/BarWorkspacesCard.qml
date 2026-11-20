@@ -13,7 +13,7 @@ BarModuleCard {
     styles: card.tab.workspaceStyles
     currentStyle: card.tab.workspacesStyle
     styleSettingId: "bar_workspaces_style"
-    styleKeywords: "pills numbers pacman workspaces style"
+    styleKeywords: "pills numbers pacman roman workspaces style"
     styleIcon: "󰮯"
     styleTitle: I18n.t("guide.bar.workspaces.style.title", "Workspaces style")
     styleDescription: I18n.t("guide.bar.workspaces.style.desc", "Choose the visual style for workspace indicators")

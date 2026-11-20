@@ -364,7 +364,8 @@
             "name": {
               "pills": "Pills",
               "numbers": "Numbers",
-              "pacman": "Pacman"
+              "pacman": "Pacman",
+              "roman": "Roman"
             }
           },
           "name": "Workspaces"
