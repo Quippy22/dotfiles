@@ -65,7 +65,11 @@ Item {
     }
 
     property bool showLayout: (!barWindow || (root.activeTarget && root.activeTarget.isPreview)) ? true : false
-    property int circleSize: barWindow ? barWindow.cs(isCompact ? 22 : 28) : (isCompact ? 22 : 28)
+    property int circleSize: {
+        let target = barWindow ? barWindow.cs(isCompact ? 30 : 34) : (isCompact ? 30 : 34);
+        if (module && module.thickness > 0) return Math.min(target, Math.floor(module.thickness));
+        return target;
+    }
 
     property bool isSysVisible: (!activeTarget || activeTarget.moduleActive) && showLayout
     property color basePrimary: (ThemeBackend.primary !== undefined && ThemeBackend.primary !== "") ? ThemeBackend.primary : ThemeBackend.mauve
@@ -152,7 +156,7 @@ Item {
 
             property vector2d itemSize: Qt.vector2d(width, height)
             property real fillRatio: circleRoot.fillRatio
-            property real strokeWidth: barWindow ? barWindow.cs(2.2) : 2.2
+            property real strokeWidth: barWindow ? barWindow.cs(2.5) : 2.5
             property real useSineWave: circleRoot.useSineWave ? 1.0 : 0.0
             property color accentColor: circleRoot.accentColor
             property vector4d params: Qt.vector4d(barWindow ? barWindow.cs(0.9) : 0.9, 0.0, 0.0, 0.0)
@@ -164,8 +168,8 @@ Item {
             anchors.centerIn: parent
             text: circleRoot.showText ? circleRoot.textVal : circleRoot.icon
             font.pixelSize: Math.round(circleRoot.showText
-                ? (barWindow ? barWindow.cs(root.isCompact ? 7.5 : 9) : (root.isCompact ? 7.5 : 9))
-                : (barWindow ? barWindow.cs(root.isCompact ? 9 : 11) : (root.isCompact ? 9 : 11)))
+                ? (barWindow ? barWindow.cs(root.isCompact ? 10.5 : 11.5) : (root.isCompact ? 10.5 : 11.5))
+                : (barWindow ? barWindow.cs(root.isCompact ? 13 : 14.5) : (root.isCompact ? 13 : 14.5)))
             font.bold: circleRoot.showText
             font.family: circleRoot.showText
                 ? ((ThemeBackend.fontFamily !== undefined && ThemeBackend.fontFamily !== "") ? ThemeBackend.fontFamily : "sans-serif")

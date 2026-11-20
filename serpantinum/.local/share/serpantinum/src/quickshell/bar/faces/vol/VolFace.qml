@@ -149,13 +149,13 @@ BarFaceBase {
         verticalItemAlignment: Grid.AlignVCenter
         visible: root.volStyle === "text"
         anchors.centerIn: parent
-        spacing: root.isVertical ? s(root.isCompact ? 2 : 3) : s(root.isCompact ? 5 : 6)
+        spacing: root.isVertical ? s(root.isCompact ? 2 : 3) : s(root.isCompact ? 6 : 7)
         opacity: root.showLayout ? 1.0 : 0.0
         Behavior on opacity { NumberAnimation { duration: 400; easing.type: Easing.OutCubic } }
 
         Item {
             visible: root.showIcon
-            width: root.isVertical ? textIcon.implicitWidth : s(root.isCompact ? 18 : 20)
+            width: root.isVertical ? textIcon.implicitWidth : s(root.isCompact ? 24 : 26)
             height: root.isVertical ? textIcon.implicitHeight : width
 
             Text {
@@ -163,7 +163,7 @@ BarFaceBase {
                 anchors.centerIn: parent
                 text: root.volIcon
                 font.family: ThemeBackend.iconFont
-                font.pixelSize: s(root.isCompact ? 14 : 15)
+                font.pixelSize: root.isVertical ? s(root.isCompact ? 14 : 15) : s(root.isCompact ? 22 : 24)
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignVCenter
                 color: textMouseArea.containsMouse ? Qt.lighter(ThemeBackend.mauve, 1.15) : (root.isSoundActive ? ThemeBackend.mauve : ThemeBackend.subtext0)
@@ -175,7 +175,7 @@ BarFaceBase {
             visible: root.showPercent
             text: root.volPercent
             font.family: ThemeBackend.fontFamily
-            font.pixelSize: root.isVertical ? s(root.isCompact ? 9 : 10) : s(root.isCompact ? 11 : 12)
+            font.pixelSize: root.isVertical ? s(root.isCompact ? 9 : 10) : s(root.isCompact ? 20 : 22)
             font.bold: true
             color: textMouseArea.containsMouse ? Qt.lighter(ThemeBackend.text, 1.15) : ThemeBackend.text
             Behavior on color { ColorAnimation { duration: 150 } }

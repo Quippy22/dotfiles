@@ -136,20 +136,20 @@ BarFaceBase {
         verticalItemAlignment: Grid.AlignVCenter
         visible: root.kbStyle === "text"
         anchors.centerIn: parent
-        spacing: s(root.isCompact ? 5 : 6)
+        spacing: s(root.isCompact ? 6 : 7)
         opacity: root.showLayout ? 1.0 : 0.0
         Behavior on opacity { NumberAnimation { duration: 400; easing.type: Easing.OutCubic } }
 
         Item {
             visible: root.showIcon && !root.isVertical
-            width: s(root.isCompact ? 18 : 20)
+            width: s(root.isCompact ? 24 : 26)
             height: width
 
             Text {
                 anchors.centerIn: parent
                 text: "󰌌"
                 font.family: ThemeBackend.iconFont
-                font.pixelSize: s(root.isCompact ? 14 : 15)
+                font.pixelSize: s(root.isCompact ? 22 : 24)
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignVCenter
                 color: textMouseArea.containsMouse ? Qt.lighter(ThemeBackend.text, 1.15) : ThemeBackend.subtext0
@@ -160,7 +160,7 @@ BarFaceBase {
         Text {
             text: root.kbLayout
             font.family: ThemeBackend.fontFamily
-            font.pixelSize: s(root.isCompact ? 11 : 12)
+            font.pixelSize: root.isVertical ? s(root.isCompact ? 11 : 12) : s(root.isCompact ? 20 : 22)
             font.bold: true
             color: textMouseArea.containsMouse ? Qt.lighter(ThemeBackend.text, 1.15) : ThemeBackend.text
             Behavior on color { ColorAnimation { duration: 150 } }
