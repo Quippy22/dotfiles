@@ -39,11 +39,10 @@ ENTRIES+=("$(format_line "SUPER + 1..9, 0" "Switch to Workspace 1..10" "WORKSPAC
 ENTRIES+=("$(format_line "SUPER + SHIFT + 1..0" "Move Window to Workspace 1..10" "WORKSPACES")")
 ENTRIES+=("$(format_line "SUPER + Scroll Up/Down" "Cycle Next / Previous Workspace" "WORKSPACES")")
 
-# --- Screenshots & Rices ---
+# --- Screenshots & Theme ---
 ENTRIES+=("$(format_line "SUPER + S" "Region Screenshot (Hyprshot)" "CAPTURE")")
 ENTRIES+=("$(format_line "SUPER + SHIFT + S" "Window Screenshot (Hyprshot)" "CAPTURE")")
-ENTRIES+=("$(format_line "SUPER + T" "Rice Selector Menu" "THEME")")
-ENTRIES+=("$(format_line "SUPER + SHIFT + B" "Wallpaper Selector Menu" "THEME")")
+ENTRIES+=("$(format_line "SUPER + SHIFT + B" "Toggle Serpantinum Wallpaper Picker" "SERPANTINUM")")
 
 # --- Serpantinum Desktop Shell Binds ---
 ENTRIES+=("$(format_line "SUPER + SHIFT + V" "Toggle Clipboard History" "SERPANTINUM")")
@@ -98,20 +97,13 @@ case "$SELECTED" in
     *"Lock Screen"*)
         command -v serpantinum >/dev/null 2>&1 && serpantinum lock
         ;;
-    *"Rice Selector"*)
-        ~/dotfiles/scripts/rice_selector.sh &
-        ;;
-    *"Wallpaper Selector"*)
-        ~/dotfiles/scripts/wallpaper_selector.sh &
+    *"Wallpaper Picker"*)
+        command -v serpantinum >/dev/null 2>&1 && serpantinum msg toggle wallpaper
         ;;
     *"Terminal"*)
         kitty &
         ;;
     *"Launcher"*)
-        if command -v serpantinum >/dev/null 2>&1 && pgrep -f "serpantinumd" >/dev/null 2>&1; then
-            serpantinum msg toggle launcher
-        else
-            wofi --show drun &
-        fi
+        command -v serpantinum >/dev/null 2>&1 && serpantinum msg toggle launcher
         ;;
 esac

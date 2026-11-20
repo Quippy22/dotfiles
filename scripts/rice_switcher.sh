@@ -1,98 +1,55 @@
 #!/usr/bin/env bash
 
-# Surgical Rice Switcher Script
-# Usage: ./rice_switcher.sh <rice_name>
+# Rice Switcher Script - Serpantinum Dedicated
+# Usage: ./rice_switcher.sh [serpantinum]
 
-RICE=$1
+RICE="${1:-serpantinum}"
 DOTFILES_DIR="$HOME/dotfiles"
 RICES_DIR="$DOTFILES_DIR/rices"
 
-if [ -z "$RICE" ]; then
-    echo "Usage: ./rice_switcher.sh <rice_name>"
-    echo "Available rices:"
-    ls "$RICES_DIR"
+if [ "$RICE" != "serpantinum" ] && [ ! -d "$RICES_DIR/$RICE" ]; then
+    echo "Rice '$RICE' not found in $RICES_DIR. Active rice: serpantinum"
     exit 1
 fi
 
-if [ ! -d "$RICES_DIR/$RICE" ]; then
-    echo "Rice '$RICE' not found in $RICES_DIR"
-    exit 1
-fi
+echo "Applying rice: $RICE..."
 
-echo "Switching to rice: $RICE..."
+# 1. Apply rice packages
+if [ -d "$RICES_DIR/$RICE" ]; then
+    cd "$RICES_DIR/$RICE"
+    PACKAGES=$(find . -maxdepth 1 -mindepth 1 -type d -printf "%f\n")
 
-# 1. Identify which packages this rice provides
-cd "$RICES_DIR/$RICE"
-PACKAGES=$(find . -maxdepth 1 -mindepth 1 -type d -printf "%f\n")
+    for PACKAGE in $PACKAGES; do
+        if [ "$PACKAGE" == "hyprland" ]; then
+            if [ -L "$HOME/.config/hypr" ]; then
+                rm -rf "$HOME/.config/hypr"
+                mkdir -p "$HOME/.config/hypr"
+            fi
 
-# 2. For each package in the target rice, swap out the symlink
-for PACKAGE in $PACKAGES; do
-    echo "Swapping $PACKAGE..."
-
-    if [ "$PACKAGE" == "hyprland" ]; then
-        if [ -L "$HOME/.config/hypr" ]; then
-            rm -rf "$HOME/.config/hypr"
-            mkdir -p "$HOME/.config/hypr"
+            stow -R hyprland -d "$DOTFILES_DIR" -t "$HOME"
+            stow -R hyprland -d "$RICES_DIR/$RICE" -t "$HOME"
+            continue
         fi
 
-        stow -R hyprland -d "$DOTFILES_DIR" -t "$HOME"
+        if [ -L "$HOME/.config/$PACKAGE" ] || [ -d "$HOME/.config/$PACKAGE" ]; then
+            rm -rf "$HOME/.config/$PACKAGE"
+        fi
 
-        for OTHER_RICE in "$RICES_DIR"/*; do
-            if [ -d "$OTHER_RICE/hyprland" ]; then
-                stow -D hyprland -d "$OTHER_RICE" -t "$HOME" 2>/dev/null
-            fi
-        done
+        stow -R "$PACKAGE" -d "$RICES_DIR/$RICE" -t "$HOME"
+    done
+fi
 
-        stow -R hyprland -d "$RICES_DIR/$RICE" -t "$HOME"
-        continue
-    fi
-
-    # Force remove current symlink or directory to ensure clean stow
-    if [ -L "$HOME/.config/$PACKAGE" ] || [ -d "$HOME/.config/$PACKAGE" ]; then
-        rm -rf "$HOME/.config/$PACKAGE"
-    fi
-
-    # Stow the rice version
-    stow -R "$PACKAGE" -d "$RICES_DIR/$RICE" -t "$HOME"
-done
-
-# --- RELOAD LOGIC ---
-
-# 1. Reload Hyprland
+# 2. Reload Hyprland
 hyprctl reload
 
-# 2. Shell Management (Waybar vs Serpantinum)
-if [ "$RICE" == "serpantinum" ]; then
-    killall waybar 2>/dev/null
-    killall swaync 2>/dev/null
-    if command -v serpantinumd >/dev/null 2>&1; then
-        serpantinumd stop 2>/dev/null
-        sleep 0.5
-        serpantinumd start & disown
-    fi
-else
-    # Stopping serpantinum if it was running
-    if command -v serpantinumd >/dev/null 2>&1; then
-        serpantinumd stop 2>/dev/null
-    fi
-    # Restart Waybar
-    if command -v waybar >/dev/null; then
-        killall waybar 2>/dev/null
-        sleep 0.5
-        waybar & disown
-    fi
+# 3. Ensure Serpantinum daemon is running
+if command -v serpantinumd >/dev/null 2>&1; then
+    serpantinumd stop 2>/dev/null
+    sleep 0.5
+    serpantinumd start & disown
 fi
 
-# 3. Reload Kitty
+# 4. Reload Kitty
 killall -USR1 kitty 2>/dev/null
 
-# 4. Reload Hyprpaper
-if [ "$RICE" != "serpantinum" ] && command -v hyprpaper >/dev/null; then
-    killall hyprpaper 2>/dev/null
-    sleep 0.5
-    hyprpaper & disown
-    sleep 0.5
-    "$DOTFILES_DIR/scripts/apply_hypr_style.sh"
-fi
-
-echo "Rice '$RICE' applied surgically!"
+echo "Rice '$RICE' applied successfully!"

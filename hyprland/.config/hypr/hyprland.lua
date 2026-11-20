@@ -9,8 +9,3 @@ require("rules")
 require("autostart")
 require("key-mouse")
 require("keybinds")
-hl.layer_rule({
-    name = "waybar-order",
-    match = { namespace = "waybar" },
-    order = style.waybar.order,
-})

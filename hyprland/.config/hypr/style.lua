@@ -9,20 +9,18 @@ local function deep_merge(base, override)
 end
 
 local style = {
+    shell = "serpantinum",
+
     apps = {
         terminal = "kitty",
-        file_manager = "nautilus",
-        launcher = "wofi --show drun --layer=overlay",
-        lock = "hyprlock",
-        clipboard = "cliphist list | wofi --dmenu | cliphist decode | wl-copy",
-        calendar = "wofi --show drun",
-        dashboard = "wofi --show drun",
-        settings = "wofi --show drun",
+        file_manager = "ski",
+        launcher = "serpantinum msg toggle launcher",
+        lock = "serpantinum lock",
+        clipboard = "serpantinum msg toggle clipboard",
+        calendar = "serpantinum msg toggle calendar",
+        dashboard = "serpantinum msg toggle system",
+        settings = "serpantinum settings",
         gtk_theme = "Arc-Dark",
-    },
-
-    waybar = {
-        order = -1,
     },
 
     persistent_terminal = {

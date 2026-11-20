@@ -1,24 +1,19 @@
 #!/usr/bin/bash
 
 # Master Stow Script
-# 1. Stows shared packages (Zsh, Neovim, etc.)
-# 2. Applies the 'sunset' rice for the UI components
+# 1. Stows shared packages (Zsh, Neovim, Kitty, Hyprland, etc.)
+# 2. Applies Serpantinum desktop shell
 
 DOTFILES_DIR="$HOME/dotfiles"
 cd "$DOTFILES_DIR"
 
-# List of shared packages that are NOT rice-specific
-SHARED_PACKAGES=("zsh" "neovim" "tmux" "oh-my-posh" "fastfetch" "hyprland" "zed" "serpantinum")
+# List of packages to stow
+SHARED_PACKAGES=("zsh" "neovim" "tmux" "oh-my-posh" "fastfetch" "hyprland" "kitty" "zed" "zellij" "serpantinum")
 
-echo "--- Cleaning and Stowing Shared Packages ---"
+echo "--- Cleaning and Stowing Packages ---"
 for PACKAGE in "${SHARED_PACKAGES[@]}"; do
     if [ -d "$PACKAGE" ]; then
         echo "Stowing $PACKAGE..."
-        # Force cleanup from any previous stows to ensure root ownership
-        if [ "$PACKAGE" != "hyprland" ]; then
-            stow -D "$PACKAGE" -d "$DOTFILES_DIR/rices/sunset" -t "$HOME" 2>/dev/null
-            stow -D "$PACKAGE" -d "$DOTFILES_DIR/rices/minimalist" -t "$HOME" 2>/dev/null
-        fi
         
         # Manually remove common files if they are real files (to avoid stow aborting)
         if [ "$PACKAGE" == "zsh" ] && [ -f "$HOME/.zshrc" ] && [ ! -L "$HOME/.zshrc" ]; then rm "$HOME/.zshrc"; fi
@@ -37,9 +32,9 @@ for PACKAGE in "${SHARED_PACKAGES[@]}"; do
 done
 
 echo ""
-echo "--- Applying Default Rice (Sunset) ---"
+echo "--- Applying Serpantinum Desktop Shell ---"
 if [ -f "./scripts/rice_switcher.sh" ]; then
-    ./scripts/rice_switcher.sh sunset
+    ./scripts/rice_switcher.sh serpantinum
 else
     echo "Error: rice_switcher.sh not found!"
 fi
