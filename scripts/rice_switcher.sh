@@ -46,7 +46,7 @@ hyprctl reload
 if command -v serpantinumd >/dev/null 2>&1; then
     serpantinumd stop 2>/dev/null
     sleep 0.5
-    serpantinumd start & disown
+    nohup serpantinumd start >/dev/null 2>&1 &
 fi
 
 # 4. Reload Kitty
