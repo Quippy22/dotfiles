@@ -89,7 +89,12 @@
     "mediaShowIcon": true,
     "mediaShowControls": true,
     "mediaHideWhenIdle": true,
-    "mediaWidth": 94
+    "mediaWidth": 94,
+    "volStyle": "text",
+    "kbStyle": "text",
+    "menuItems": [
+      "settings"
+    ]
   },
   "theme": {
     "fontFamily": "JetBrains Mono",
@@ -261,7 +266,7 @@
     "itemCount": 6,
     "terminalCommand": "kitty -e",
     "smartRanking": true,
-    "searchProvider": "google"
+    "searchProvider": "brave"
   },
   "lockscreen": {
     "fingerprintEnabled": true,
