@@ -47,7 +47,8 @@ ENTRIES+=("$(format_line "SUPER + SHIFT + B" "Toggle Serpantinum Wallpaper Picke
 # --- Serpantinum Desktop Shell Binds ---
 ENTRIES+=("$(format_line "SUPER + SHIFT + V" "Toggle Clipboard History" "SERPANTINUM")")
 ENTRIES+=("$(format_line "SUPER + Y" "Toggle Clipboard History (Quick Yank)" "SERPANTINUM")")
-ENTRIES+=("$(format_line "SUPER + N" "Toggle Calendar & Notifications" "SERPANTINUM")")
+ENTRIES+=("$(format_line "SUPER + N" "Toggle Notification Center" "SERPANTINUM")")
+ENTRIES+=("$(format_line "SUPER + SHIFT + N" "Toggle Notification Center" "SERPANTINUM")")
 ENTRIES+=("$(format_line "SUPER + ALT + C" "Toggle Calendar" "SERPANTINUM")")
 ENTRIES+=("$(format_line "SUPER + B" "Toggle System Dashboard / Control Center" "SERPANTINUM")")
 ENTRIES+=("$(format_line "SUPER + I" "Toggle System Info / Dashboard" "SERPANTINUM")")
@@ -78,6 +79,9 @@ SELECTED=$(printf "%s\n" "$MENU_INPUT" | wofi --dmenu \
 case "$SELECTED" in
     *"Clipboard"*)
         command -v serpantinum >/dev/null 2>&1 && serpantinum msg toggle clipboard
+        ;;
+    *"Notification"*)
+        command -v serpantinum >/dev/null 2>&1 && serpantinum msg toggle notifications
         ;;
     *"Calendar"*)
         command -v serpantinum >/dev/null 2>&1 && serpantinum msg toggle calendar

@@ -10,6 +10,7 @@ local menu        = style.apps.launcher
 local lockCmd     = style.apps.lock or "serpantinum lock"
 local clipboard   = style.apps.clipboard
 local calendar    = style.apps.calendar
+local notifications = style.apps.notifications or "serpantinum msg toggle notifications"
 local dashboard   = style.apps.dashboard
 local settings    = style.apps.settings
 local persistTerm = style.persistent_terminal
@@ -87,8 +88,11 @@ if clipboard then
     hl.bind(mainMod .. " + SHIFT + V", hl.dsp.exec_cmd(clipboard))
     hl.bind(mainMod .. " + Y",         hl.dsp.exec_cmd(clipboard))
 end
+if notifications then
+    hl.bind(mainMod .. " + N",         hl.dsp.exec_cmd(notifications))
+    hl.bind(mainMod .. " + SHIFT + N", hl.dsp.exec_cmd(notifications))
+end
 if calendar then
-    hl.bind(mainMod .. " + N",         hl.dsp.exec_cmd(calendar))
     hl.bind(mainMod .. " + ALT + C",   hl.dsp.exec_cmd(calendar))
 end
 if dashboard then

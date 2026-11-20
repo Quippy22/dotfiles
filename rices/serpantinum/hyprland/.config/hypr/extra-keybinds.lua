@@ -11,8 +11,11 @@ return function(mainMod)
     hl.bind(mainMod .. " + SHIFT + V", hl.dsp.exec_cmd("serpantinum msg toggle clipboard"))
     hl.bind(mainMod .. " + Y",         hl.dsp.exec_cmd("serpantinum msg toggle clipboard"))
 
-    -- Calendar & Notification Center (SUPER + N and SUPER + ALT + C preserve SUPER + S for screenshot)
-    hl.bind(mainMod .. " + N",         hl.dsp.exec_cmd("serpantinum msg toggle calendar"))
+    -- Notification Center
+    hl.bind(mainMod .. " + N",         hl.dsp.exec_cmd("serpantinum msg toggle notifications"))
+    hl.bind(mainMod .. " + SHIFT + N", hl.dsp.exec_cmd("serpantinum msg toggle notifications"))
+
+    -- Calendar
     hl.bind(mainMod .. " + ALT + C",   hl.dsp.exec_cmd("serpantinum msg toggle calendar"))
 
     -- System Dashboard & Control Center (SUPER + B, SUPER + I, and SUPER + ALT + D preserve SUPER + M for shutdown)

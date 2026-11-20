@@ -18,6 +18,7 @@ local style = {
         lock = "serpantinum lock",
         clipboard = "serpantinum msg toggle clipboard",
         calendar = "serpantinum msg toggle calendar",
+        notifications = "serpantinum msg toggle notifications",
         dashboard = "serpantinum msg toggle system",
         settings = "serpantinum settings",
         gtk_theme = "Arc-Dark",
@@ -42,34 +43,28 @@ local style = {
 
     config = {
         general = {
-            gaps_in  = 2,
-            gaps_out = 4,
-            border_size = 2,
+            gaps_in  = 1,
+            gaps_out = 2,
+            border_size = 1,
             col = {
-                active_border   = { colors = {"rgba(f03030ee)", "rgba(f7439add)"}, angle = 45 },
-                inactive_border = { colors = {"rgba(f0303088)", "rgba(f7439a77)"}, angle = 45 },
+                active_border   = "rgba(ffffffaa)",
+                inactive_border = "rgba(333333aa)",
             },
-            resize_on_border = false,
+            resize_on_border = true,
             allow_tearing = false,
             layout = "dwindle",
         },
 
         decoration = {
-            rounding       = 10,
+            rounding       = 0,
             rounding_power = 2,
             active_opacity   = 1.0,
             inactive_opacity = 1.0,
             shadow = {
-                enabled      = true,
-                range        = 4,
-                render_power = 3,
-                color        = "rgba(1a1a1aee)",
+                enabled      = false,
             },
             blur = {
-                enabled   = true,
-                size      = 1,
-                passes    = 1,
-                vibrancy  = 0.1696,
+                enabled   = false,
             },
         },
 
