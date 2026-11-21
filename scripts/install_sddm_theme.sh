@@ -16,6 +16,7 @@ fi
 
 echo "Installing Serpantinum SDDM theme (material-you)..."
 sudo cp -r "$THEME_DIR" "/usr/share/sddm/themes/"
+sudo chmod -R a+rX "$TARGET_DIR"
 
 echo "Configuring SDDM to use material-you theme..."
 sudo mkdir -p "$(dirname "$SDDM_CONF")"
