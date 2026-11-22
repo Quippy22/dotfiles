@@ -8,6 +8,7 @@ Item {
     id: root
 
     property int updateCount: 0
+    property var packagesList: []
     property bool isChecking: false
     property bool hasChecked: false
 
@@ -20,10 +21,10 @@ Item {
     function launchUpdater() {
         let term = "kitty -e";
         if (typeof Config !== "undefined" && Config.rawSettings && Config.rawSettings.launcher && Config.rawSettings.launcher.terminalCommand) {
-            term = Config.rawSettings.launcher.terminalCommand.trim();
+            let tc = Config.rawSettings.launcher.terminalCommand.trim();
+            if (tc) term = tc;
         }
-        let updateCmd = "if command -v yay >/dev/null 2>&1; then yay; else sudo pacman -Syu; fi; echo; read -p 'Press Enter to close...'";
-        let fullCmd = term + " bash -c \"" + updateCmd + "\"";
+        let fullCmd = term + " yay -Syu --noconfirm --ignore gemini-cli";
         Quickshell.execDetached(["bash", "-c", fullCmd]);
     }
 
@@ -32,14 +33,21 @@ Item {
         running: false
         command: [
             "bash",
-            (typeof Caching !== "undefined" && Caching.serpantinumDir ? (Caching.serpantinumDir + "/scripts/check_updates.sh") : "/home/darius/dotfiles/serpantinum/.local/share/serpantinum/src/scripts/check_updates.sh")
+            (typeof Caching !== "undefined" && Caching.serpantinumDir ? (Caching.serpantinumDir + "/scripts/check_updates.sh") : "/home/darius/.local/share/serpantinum/src/scripts/check_updates.sh"),
+            "--json"
         ]
         stdout: StdioCollector {
             onStreamFinished: {
                 let out = this.text ? this.text.trim() : "";
-                let n = parseInt(out, 10);
-                if (!isNaN(n)) {
-                    root.updateCount = n;
+                try {
+                    let parsed = JSON.parse(out);
+                    if (parsed && typeof parsed === "object") {
+                        if (parsed.count !== undefined) root.updateCount = Number(parsed.count);
+                        if (Array.isArray(parsed.packages)) root.packagesList = parsed.packages;
+                    }
+                } catch (e) {
+                    let n = parseInt(out, 10);
+                    if (!isNaN(n)) root.updateCount = n;
                 }
                 root.hasChecked = true;
                 root.isChecking = false;

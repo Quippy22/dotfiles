@@ -106,7 +106,7 @@ BarFaceBase {
             if (mouse.button === Qt.RightButton) {
                 UpdatesState.checkNow();
             } else {
-                UpdatesState.launchUpdater();
+                Quickshell.execDetached(["bash", "-c", (typeof Caching !== "undefined" && Caching.serpantinumDir ? Caching.serpantinumDir : "/home/darius/.local/share/serpantinum") + "/scripts/qs_manager.sh toggle updates"]);
             }
         }
     }
@@ -189,7 +189,7 @@ BarFaceBase {
             transform: Translate { y: updatesPill.initAnimTrigger ? 0 : s(15); Behavior on y { NumberAnimation { duration: 620; easing.type: Easing.OutQuint } } }
             Behavior on opacity { NumberAnimation { duration: 400; easing.type: Easing.OutCubic } }
 
-            onClicked: UpdatesState.launchUpdater()
+            onClicked: Quickshell.execDetached(["bash", "-c", (typeof Caching !== "undefined" && Caching.serpantinumDir ? Caching.serpantinumDir : "/home/darius/.local/share/serpantinum") + "/scripts/qs_manager.sh toggle updates"])
             onRightClicked: UpdatesState.checkNow()
         }
     }
@@ -208,7 +208,7 @@ BarFaceBase {
             accentColor: root.lockLook ? Qt.lighter(ThemeBackend.surface0, 1.28) : (root.isCompact ? Qt.lighter(ThemeBackend.surface0, 1.18) : ThemeBackend.surface0)
             textColor: isHoveredOrHighlighted ? ThemeBackend.text : (root.isCompact ? Qt.lighter(ThemeBackend.text, 1.05) : ThemeBackend.text)
 
-            onClicked: UpdatesState.launchUpdater()
+            onClicked: Quickshell.execDetached(["bash", "-c", (typeof Caching !== "undefined" && Caching.serpantinumDir ? Caching.serpantinumDir : "/home/darius/.local/share/serpantinum") + "/scripts/qs_manager.sh toggle updates"])
             onRightClicked: UpdatesState.checkNow()
         }
     }

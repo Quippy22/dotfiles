@@ -61,6 +61,13 @@ function getWidgetLauncherEntries(i18n) {
             fontIcon: "󰒓"
         },
         {
+            id: "updates",
+            name: tr("widgets.updates.name", "System Updates"),
+            description: tr("widgets.updates.desc", "Preview and install package updates"),
+            icon: "system-software-update",
+            fontIcon: "󰁝"
+        },
+        {
             id: "keybinds",
             name: tr("widgets.keybinds.name", "Keybindings"),
             description: tr("widgets.keybinds.desc", "Browse and search Hyprland & Serpantinum shortcuts"),
@@ -145,6 +152,15 @@ function getLayout(name, mx, my, mw, mh, userScale, barPosition) {
                 "bottom": { anchor: "center" }, 
                 "left": { anchor: "center" }, 
                 "right": { anchor: "center" } 
+            } 
+        },
+        "updates": { 
+            w: 380, h: 480, comp: "updates/UpdatesPopup.qml", 
+            pos: { 
+                "top": { anchor: "top-right", mt: 45, mr: 5 }, 
+                "bottom": { anchor: "bottom-right", mb: 45, mr: 5 }, 
+                "left": { anchor: "bottom-left", ml: 45, mb: 5 }, 
+                "right": { anchor: "bottom-right", mr: 45, mb: 5 } 
             } 
         },
         "hidden": { 
