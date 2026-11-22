@@ -15,6 +15,7 @@ QtObject {
         if (s === "battery" || s === "bat") return "bat";
         if (s === "visualizer" || s === "viswidget" || s === "vis") return "vis";
         if (s === "top" || s === "left") return "left";
+        if (s === "updates" || s === "update" || s === "pacman" || s === "pkg") return "updates";
         return s;
     }
 
@@ -278,6 +279,28 @@ QtObject {
                     face: "faces/bat/BatFace.qml"
                 }
             }
+        },
+        "updates": {
+            name: typeof I18n !== "undefined" ? I18n.t("guide.bar.modules.updates", "Updates") : "Updates",
+            icon: "󰁝",
+            defaultVariant: "text",
+            face: "faces/updates/UpdatesFace.qml",
+            variants: {
+                "text": {
+                    id: "text",
+                    name: typeof I18n !== "undefined" ? I18n.t("guide.bar.updates.style.name.text", "Text") : "Text",
+                    desc: typeof I18n !== "undefined" ? I18n.t("guide.bar.updates.style.text", "Clean text and icon without background") : "Clean text and icon without background",
+                    icon: "󰁝",
+                    face: "faces/updates/UpdatesFace.qml"
+                },
+                "button": {
+                    id: "button",
+                    name: typeof I18n !== "undefined" ? I18n.t("guide.bar.updates.style.name.button", "Button") : "Button",
+                    desc: typeof I18n !== "undefined" ? I18n.t("guide.bar.updates.style.button", "Interactive button pill with background") : "Interactive button pill with background",
+                    icon: "󰁝",
+                    face: "faces/updates/UpdatesFace.qml"
+                }
+            }
         }
     })
 
@@ -316,6 +339,10 @@ QtObject {
         if (norm === "bat") {
             if (bs.batStyle) return bs.batStyle;
             return "classic";
+        }
+        if (norm === "updates") {
+            if (bs.updatesStyle) return bs.updatesStyle;
+            return "text";
         }
 
         let t = types[norm];

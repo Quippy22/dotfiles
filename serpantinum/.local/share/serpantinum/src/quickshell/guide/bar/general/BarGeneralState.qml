@@ -196,7 +196,8 @@ GuideTab {
             "wifi": I18n.t("guide.bar.modules.network"),
             "bt": I18n.t("guide.bar.modules.bluetooth"),
             "vol": I18n.t("guide.bar.modules.volume"),
-            "bat": I18n.t("guide.bar.modules.battery")
+            "bat": I18n.t("guide.bar.modules.battery"),
+            "updates": typeof I18n !== "undefined" ? I18n.t("guide.bar.modules.updates", "Updates") : "Updates"
         };
         let icons = {
             "left": "󰍜",
@@ -213,7 +214,8 @@ GuideTab {
             "wifi": "󰤨",
             "bt": "󰂲",
             "vol": "󰕾",
-            "bat": "󰁹"
+            "bat": "󰁹",
+            "updates": "󰁝"
         };
         let colors = {
             "left": ThemeBackend.blue,
@@ -230,7 +232,8 @@ GuideTab {
             "wifi": ThemeBackend.blue,
             "bt": ThemeBackend.mauve,
             "vol": ThemeBackend.peach,
-            "bat": ThemeBackend.green
+            "bat": ThemeBackend.green,
+            "updates": ThemeBackend.peach
         };
         let mType = BarModuleRegistry.types ? BarModuleRegistry.types[id] : null;
         return {

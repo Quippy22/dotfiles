@@ -57,6 +57,7 @@
       ],
       "right": [
         [
+          "updates",
           "sysmon",
           "kb",
           "vol"
@@ -68,7 +69,8 @@
     "groupColors": {
       "g_timedate": "#bc8cff",
       "g_kb": "#d2a8ff",
-      "g_sysmon": "#58a6ff"
+      "g_sysmon": "#58a6ff",
+      "g_updates": "#f0883e"
     },
     "menuStyle": "icon",
     "workspaceCount": 4,
@@ -94,7 +96,8 @@
     "menuItems": [
       "settings"
     ],
-    "mediaInfoMode": "duration"
+    "mediaInfoMode": "duration",
+    "updatesStyle": "text"
   },
   "theme": {
     "fontFamily": "JetBrains Mono",
@@ -278,4 +281,3 @@
     "promptBackdropMode": "wallpaper"
   }
 }
-

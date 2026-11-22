@@ -217,6 +217,7 @@ Item {
     readonly property var btWidget: getModuleItem("bt")
     readonly property var volWidget: getModuleItem("vol")
     readonly property var batWidget: getModuleItem("bat")
+    readonly property var updatesWidget: getModuleItem("updates")
 
     function isModuleActive(moduleId) {
         let norm = BarModuleRegistry.normalizeId(moduleId);
@@ -269,6 +270,7 @@ Item {
     property real wBt: (isModuleActive("bt") && btWidget) ? (btWidget.targetWidth !== undefined ? btWidget.targetWidth : btWidget.width) : 0
     property real wVol: (isModuleActive("vol") && volWidget) ? (volWidget.targetWidth !== undefined ? volWidget.targetWidth : volWidget.width) : 0
     property real wBat: (isModuleActive("bat") && batWidget) ? (batWidget.targetWidth !== undefined ? batWidget.targetWidth : batWidget.width) : 0
+    property real wUpdates: (isModuleActive("updates") && updatesWidget) ? (updatesWidget.targetWidth !== undefined ? updatesWidget.targetWidth : updatesWidget.width) : 0
     property real wTimedate: (isModuleActive("timedate") && timeDateWidget) ? (timeDateWidget.targetWidth !== undefined ? timeDateWidget.targetWidth : timeDateWidget.width) : 0
     property real wInfo: (isModuleActive("info") && infoWidget) ? (infoWidget.targetWidth !== undefined ? infoWidget.targetWidth : infoWidget.width) : 0
     property real wWeather: (isModuleActive("weather") && weatherWidget) ? (weatherWidget.targetWidth !== undefined ? weatherWidget.targetWidth : weatherWidget.width) : 0
@@ -287,6 +289,7 @@ Item {
         if (norm === "bt") return wBt;
         if (norm === "vol") return wVol;
         if (norm === "bat") return wBat;
+        if (norm === "updates") return wUpdates;
         if (norm === "timedate") return wTimedate;
         if (norm === "info") return wInfo;
         if (norm === "weather") return wWeather;
@@ -512,6 +515,7 @@ Item {
         if (widgetName === "bt") return w ? (w.btPill || w) : null;
         if (widgetName === "volume" || widgetName === "vol") return w ? (w.volPill || w) : null;
         if (widgetName === "battery" || widgetName === "bat") return w ? (w.batPill || w) : null;
+        if (widgetName === "updates" || widgetName === "update") return w ? (w.updatesPill || w) : null;
         if (widgetName === "system" || widgetName === "pills") return systemWidget;
         return w;
     }
@@ -716,9 +720,10 @@ Item {
         readonly property var btPill: btWidget ? btWidget.btPill : null
         readonly property var volPill: volWidget ? volWidget.volPill : null
         readonly property var batPill: batWidget ? batWidget.batPill : null
+        readonly property var updatesPill: updatesWidget ? updatesWidget.updatesPill : null
 
         function getBounds() {
-            let pills = [sysMonWidget, kbWidget, wifiWidget, btWidget, volWidget, batWidget];
+            let pills = [sysMonWidget, kbWidget, wifiWidget, btWidget, volWidget, batWidget, updatesWidget];
             let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
             let found = false;
             for (let i = 0; i < pills.length; i++) {

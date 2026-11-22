@@ -44,6 +44,7 @@ Rectangle {
     readonly property var wifiPill: (faceLoader.item && faceLoader.item.wifiPill) ? faceLoader.item.wifiPill : null
     readonly property var btPill: (faceLoader.item && faceLoader.item.btPill) ? faceLoader.item.btPill : null
     readonly property var batPill: (faceLoader.item && faceLoader.item.batPill) ? faceLoader.item.batPill : null
+    readonly property var updatesPill: (faceLoader.item && faceLoader.item.updatesPill) ? faceLoader.item.updatesPill : null
     readonly property var recRow: (faceLoader.item && faceLoader.item.recRow) ? faceLoader.item.recRow : null
     readonly property var recCol: (faceLoader.item && faceLoader.item.recCol) ? faceLoader.item.recCol : null
 
